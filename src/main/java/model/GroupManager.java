@@ -44,4 +44,9 @@ public class GroupManager implements DBManager {
 
 		return groupList;
 	}
+
+	public String getHtmlUrl(int sId) {
+		return dbUtil.getGroupNameBySid(sId).replace(" ", "_") + "/"
+				+ dbUtil.getProjectNameBySid(sId).replace(" ", "_");
+	}
 }

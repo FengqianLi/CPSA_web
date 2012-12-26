@@ -91,7 +91,7 @@ public class UploadFileServlet1 extends HttpServlet {
 				submit.setDescription(description);
 				submit.setAnalyzers(new String(analyzers));
 				int sId = DBManager.dbUtil.addSubmit(submit);
-				String initPath = protocol.PathProtocol.PATH
+				String initPath = protocol.PathProtocol.PATH + "/"
 						+ DBManager.dbUtil.getGroupNameByGroupId(project
 								.getGroupId()) + "/" + project.getProjectName();
 				for (Pair pair : fileList) {

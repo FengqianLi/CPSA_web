@@ -644,6 +644,34 @@ public class DBUtil {
 		}
 	}
 
+	public String getGroupNameBySid(int sId) {
+		String sql = "select GroupInfo.name from Submit, UserInfo, GroupInfo where Submit.uid = UserInfo.uid and UserInfo.gid = GroupInfo.gid and Submit.sid = "
+				+ sId;
+		ResultSet rs = anAgent.select(sql);
+		try {
+			while (rs.next()) {
+				return rs.getString("name");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	public String getProjectNameBySid(int sId) {
+		String sql = "select Project.name from Project, Submit where Project.pid = Submit.pid and Submit.sid = "
+				+ sId;
+		ResultSet rs = anAgent.select(sql);
+		try {
+			while (rs.next()) {
+				return rs.getString("name");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
 	public AnalyzeResult getAnalyzeResultListBySidandFileName(int sid,
 			String fileName) {
 		AnalyzeResult analyzeResult = new AnalyzeResult();

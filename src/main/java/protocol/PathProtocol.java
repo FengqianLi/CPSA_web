@@ -1,5 +1,6 @@
 package protocol;
 
 public class PathProtocol {
-	public static String PATH = "/var/local/huawei";
+	public static String PATH = "/root/plugin-dev/test";
+	public static String RUNPATH="/root/plugin-dev/run.sh";
 }

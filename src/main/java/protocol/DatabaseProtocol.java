@@ -4,7 +4,7 @@ public class DatabaseProtocol {
 	// Connection pool name
 	public static final String POOL_NAME = "connectPool";
 	// Database connection Url
-	public static final String DB_CONN_URL = "jdbc:mysql://127.0.0.1:3306/huawei";
+	public static final String DB_CONN_URL = "jdbc:mysql://192.168.0.100:3306/huawei";
 	// JDBC driver name
 	public static final String JDBC_DRIVER_NAME = "com.mysql.jdbc.Driver";
 	// Connection pool driver name

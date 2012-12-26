@@ -102,11 +102,27 @@
 				<%
 					String nameWithoutPath = name
 								.substring(name.lastIndexOf("/") + 1);
-						if (name.endsWith(".cpp")) {
-							out.println("<a href=\""
-									+ name.replace("cpp", "cpp." + sid + ".html")
-									+ "\" target=\"_blank\">" + nameWithoutPath
-									+ "</a>");
+						if (name.endsWith(".cpp")) {	
+							out.println(nameWithoutPath);
+							String html_url1 = DBManager.dbUtil.getGroupNameBySid(
+									Integer.parseInt(sid[0])).replace(" ", "_")
+									+ "/"
+									+ DBManager.dbUtil.getProjectNameBySid(
+											Integer.parseInt(sid[0])).replace(" ", "_")
+									+ "/";
+							html_url1 += name.replace("cpp", "cpp." + sid[0] + ".html");
+							out.println("<a href=\"" + html_url1
+									+ "\" target=\"_blank\">[1]</a>");
+
+							String html_url2 = DBManager.dbUtil.getGroupNameBySid(
+									Integer.parseInt(sid[1])).replace(" ", "_")
+									+ "/"
+									+ DBManager.dbUtil.getProjectNameBySid(
+											Integer.parseInt(sid[1])).replace(" ", "_")
+									+ "/";
+							html_url2 += name.replace("cpp", "cpp." + sid[1] + ".html");
+							out.println("<a href=\"" + html_url1
+									+ "\" target=\"_blank\"> [2]</a>");
 				%>
 				<a
 					href="analyzeDetail2.jsp?sid1=<%=sid[0]%>&sid2=<%=sid[1]%>&fileName=<%=name%>">

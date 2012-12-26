@@ -1,13 +1,16 @@
 package utils;
 
+import protocol.MailProtocol;
+import protocol.SiteProtocol;
+
 public class MailTo {
 
-	private String serverHost = "smtp.163.com";
-	private String ServerPort = "25";
-	private String userName = "kiddlee_zj";
-	private String password = "19890505kiddlee";
-	private String fromAddress = "kiddlee_zj@163.com";
-	private String pageAddress = "localhost:8080/huawei/resetPassword.jsp";
+	private String serverHost = MailProtocol.SERVERHOST;
+	private String ServerPort = MailProtocol.SERVERPORT;
+	private String userName = MailProtocol.USERNAME;
+	private String password = MailProtocol.PASSWORD;
+	private String fromAddress = MailProtocol.FROMADDRESS;
+	private String pageAddress = SiteProtocol.URL + "/resetPassword.jsp";
 	private String subject = "华为静态代码性能检测系统密码修改";
 
 	public MailTo() {

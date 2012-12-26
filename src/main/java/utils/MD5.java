@@ -5,8 +5,6 @@ Last Modified:10,Mar,2001
  *************************************************/
 package utils;
 
-import java.lang.reflect.*;
-
 /*************************************************
  * md5 类实现了RSA Data Security, Inc.在提交给IETF 的RFC1321中的MD5 message-digest 算法。
  *************************************************/

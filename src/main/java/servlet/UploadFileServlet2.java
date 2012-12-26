@@ -83,7 +83,7 @@ public class UploadFileServlet2 extends HttpServlet {
 						submit.setProjectId(project.getProjectId());
 						submit.setAnalyzers(new String(analyzers));
 						submit.setSubmitId(DBManager.dbUtil.addSubmit(submit));
-						String projectPath = protocol.PathProtocol.PATH
+						String projectPath = protocol.PathProtocol.PATH + "/"
 								+ DBManager.dbUtil
 										.getGroupNameByGroupId(project
 												.getGroupId()) + "/"

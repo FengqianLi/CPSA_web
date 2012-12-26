@@ -72,8 +72,13 @@
 					String nameWithoutPath = name
 								.substring(name.lastIndexOf("/") + 1);
 						if (name.endsWith(".cpp")) {
-							out.println("<a href=\""
-									+ name.replace("cpp", "cpp." + sid + ".html")
+							String html_url = DBManager.dbUtil.getGroupNameBySid(sid).replace(
+									" ", "_")
+									+ "/"
+									+ DBManager.dbUtil.getProjectNameBySid(sid).replace(" ", "_")
+									+ "/";
+							html_url += name.replace("cpp", "cpp." + sid + ".html");
+							out.println("<a href=\"" + html_url
 									+ "\" target=\"_blank\">" + nameWithoutPath
 									+ "</a>");
 				%>
