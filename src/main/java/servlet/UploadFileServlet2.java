@@ -1,8 +1,14 @@
 package servlet;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.InvalidPropertiesFormatException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import javabeans.Project;
 import javabeans.Submit;
@@ -24,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import utils.Executor;
+import utils.MailTo;
 
 import dbManager.DBManager;
 
@@ -83,7 +90,26 @@ public class UploadFileServlet2 extends HttpServlet {
 						submit.setProjectId(project.getProjectId());
 						submit.setAnalyzers(new String(analyzers));
 						submit.setSubmitId(DBManager.dbUtil.addSubmit(submit));
-						String projectPath = protocol.PathProtocol.PATH + "/"
+
+						Properties pathProp = new Properties();
+						FileInputStream pathFis;
+						try {
+							String path = MailTo.class.getClassLoader()
+									.getResource("").toURI().getPath();
+							pathFis = new FileInputStream(path
+									+ "pathconfig.xml");
+							pathProp.loadFromXML(pathFis);
+						} catch (FileNotFoundException e1) {
+							e1.printStackTrace();
+						} catch (InvalidPropertiesFormatException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						} catch (URISyntaxException e) {
+							e.printStackTrace();
+						}
+						String projectPath = pathProp.getProperty("test path")
+								+ "/"
 								+ DBManager.dbUtil
 										.getGroupNameByGroupId(project
 												.getGroupId()) + "/"

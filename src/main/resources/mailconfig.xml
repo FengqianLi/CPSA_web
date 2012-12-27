@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>Mail Configuration</comment>
+	<entry key="server host">smtp.163.com</entry>
+	<entry key="server port">25</entry>
+	<entry key="user">kiddlee_zj</entry>
+	<entry key="password">19890505kiddlee</entry>
+	<entry key="from address">kiddlee_zj@163.com</entry>
+	<entry key=""></entry>
+</properties>

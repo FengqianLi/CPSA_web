@@ -1,8 +1,13 @@
 package dao;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import org.apache.commons.dbcp.ConnectionFactory;
@@ -14,8 +19,6 @@ import org.apache.commons.pool.impl.GenericObjectPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import protocol.DatabaseProtocol;
-
 /**
  * Initial and manage the connetion pool
  * 
@@ -25,6 +28,8 @@ import protocol.DatabaseProtocol;
 class DBConnPool {
 	private static final Logger logger = LoggerFactory
 			.getLogger(DBConnPool.class);
+
+	private static Properties prop = new Properties();
 
 	/**
 	 * Set up the connection pool in static initialization
@@ -39,46 +44,59 @@ class DBConnPool {
 	private static void setupPool() {
 		logger.info("Initializing the Connetion Pool......");
 
+		FileInputStream fis;
+		try {
+			String path = DBConnPool.class.getClassLoader().getResource("")
+					.toURI().getPath();
+			fis = new FileInputStream(path + "dbconfig.xml");
+			prop.loadFromXML(fis);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (InvalidPropertiesFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+
 		try {
 			// Add JDBC Driver into JVM
-			Class.forName(DatabaseProtocol.JDBC_DRIVER_NAME);
+			Class.forName(prop.getProperty("jdbc driver name"));
 
 			// Create general connection pool
 			GenericObjectPool connectionPool = new GenericObjectPool(null);
 
 			// Set the parameters of the connection pool
-			connectionPool.setMaxActive(DatabaseProtocol.MAX_ACTIVE_NUM);
-			connectionPool.setMaxIdle(DatabaseProtocol.MAX_IDLE_NUM);
-			connectionPool.setMaxWait(DatabaseProtocol.MAX_WAIT_NUM);
+			connectionPool.setMaxActive(Integer.parseInt(prop
+					.getProperty("max active num")));
+			connectionPool.setMaxIdle(Integer.parseInt(prop
+					.getProperty("max idle num")));
+			connectionPool.setMaxWait(Integer.parseInt(prop
+					.getProperty("max wait num")));
 
-			// Create the pool factory
-			Properties prop = new Properties();
-
-			prop.setProperty("user", DatabaseProtocol.USER_NAME);
-			prop.setProperty("password", DatabaseProtocol.PASSWORD);
-			prop.setProperty("useUnicode", DatabaseProtocol.USE_UNICODE);
-			prop.setProperty("characterEncoding",
-					DatabaseProtocol.CHARACTER_ENCODING);
 			ConnectionFactory connectionFactory = new DriverManagerConnectionFactory(
-					DatabaseProtocol.DB_CONN_URL, prop);
+					"jdbc:mysql://" + prop.getProperty("database ip") + ":"
+							+ prop.getProperty("database port") + "/"
+							+ prop.getProperty("database schema"), prop);
 
 			// Create PoolableConnectionFactory
 			new PoolableConnectionFactory(connectionFactory, connectionPool,
 					null, null, false, true);
 
 			// Create Connetion Pool Driver
-			Class.forName(DatabaseProtocol.POOL_DRIVER_NAME);
+			Class.forName(prop.getProperty("pool driver name"));
 			PoolingDriver driver = (PoolingDriver) DriverManager
 					.getDriver("jdbc:apache:commons:dbcp:");
 
 			// Regiser the pool to JVM
-			driver.registerPool(DatabaseProtocol.POOL_NAME, connectionPool);
+			driver.registerPool("connectPool", connectionPool);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("Create Connetion Pool：{} Successfully",
-				DatabaseProtocol.POOL_NAME);
+				prop.getProperty("pool name"));
 	}
 
 	/**
@@ -121,8 +139,8 @@ class DBConnPool {
 		try {
 			PoolingDriver driver = (PoolingDriver) DriverManager
 					.getDriver("jdbc:apache:commons:dbcp:");
-			ObjectPool connectionPool = driver
-					.getConnectionPool(DatabaseProtocol.POOL_NAME);
+			ObjectPool connectionPool = driver.getConnectionPool(prop
+					.getProperty("pool name"));
 
 			logger.info("NumActive: {}", connectionPool.getNumActive());
 			logger.info("NumIdle: ", connectionPool.getNumIdle());
