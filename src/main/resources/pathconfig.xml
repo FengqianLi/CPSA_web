@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-	<comment>Database Configuration</comment>
-	<entry key="test path">/home/damon/test</entry>
-	<entry key="run path">/home/damon/Workspace/test/run.sh</entry>
-</properties>

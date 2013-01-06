@@ -18,17 +18,13 @@ public class MailTo {
 	private String subject;
 
 	public MailTo() {
-		Properties mailProp = new Properties();
-		Properties siteProp = new Properties();
-		FileInputStream mailFis;
-		FileInputStream siteFis;
+		Properties prop = new Properties();
+		FileInputStream fis;
 		try {
 			String path = MailTo.class.getClassLoader().getResource("").toURI()
 					.getPath();
-			mailFis = new FileInputStream(path + "mailconfig.xml");
-			mailProp.loadFromXML(mailFis);
-			siteFis = new FileInputStream(path + "siteconfig.xml");
-			siteProp.loadFromXML(siteFis);
+			fis = new FileInputStream(path + "config.xml");
+			prop.loadFromXML(fis);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (InvalidPropertiesFormatException e) {
@@ -39,12 +35,12 @@ public class MailTo {
 			e.printStackTrace();
 		}
 
-		this.serverHost = mailProp.getProperty("server host");
-		this.ServerPort = mailProp.getProperty("server port");
-		this.userName = mailProp.getProperty("user");
-		this.password = mailProp.getProperty("password");
-		this.fromAddress = mailProp.getProperty("from address");
-		this.pageAddress = siteProp.getProperty("site url")
+		this.serverHost = prop.getProperty("server_host");
+		this.ServerPort = prop.getProperty("server_port");
+		this.userName = prop.getProperty("mail_user");
+		this.password = prop.getProperty("mail_password");
+		this.fromAddress = prop.getProperty("from_address");
+		this.pageAddress = prop.getProperty("site_url")
 				+ "/resetPassword.jsp";
 		this.subject = "华为静态代码性能检测系统密码修改";
 	}

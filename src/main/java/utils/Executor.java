@@ -22,7 +22,7 @@ public class Executor {
 		try {
 			String path = MailTo.class.getClassLoader().getResource("").toURI()
 					.getPath();
-			pathFis = new FileInputStream(path + "pathconfig.xml");
+			pathFis = new FileInputStream(path + "config.xml");
 			pathProp.loadFromXML(pathFis);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
@@ -35,8 +35,8 @@ public class Executor {
 		}
 
 		String[] cmd = { "/bin/sh", "-c",
-				pathProp.getProperty("run path") + " " + sId };
-		logger.debug(pathProp.getProperty("run path") + " " + sId);
+				pathProp.getProperty("run_path") + " " + sId };
+		logger.debug(pathProp.getProperty("run_path") + " " + sId);
 		try {
 			Process proc = Runtime.getRuntime().exec(cmd);
 			proc.waitFor();

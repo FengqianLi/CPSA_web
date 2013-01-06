@@ -96,8 +96,7 @@ public class UploadFileServlet2 extends HttpServlet {
 						try {
 							String path = MailTo.class.getClassLoader()
 									.getResource("").toURI().getPath();
-							pathFis = new FileInputStream(path
-									+ "pathconfig.xml");
+							pathFis = new FileInputStream(path + "config.xml");
 							pathProp.loadFromXML(pathFis);
 						} catch (FileNotFoundException e1) {
 							e1.printStackTrace();
@@ -108,7 +107,7 @@ public class UploadFileServlet2 extends HttpServlet {
 						} catch (URISyntaxException e) {
 							e.printStackTrace();
 						}
-						String projectPath = pathProp.getProperty("test path")
+						String projectPath = pathProp.getProperty("test_path")
 								+ "/"
 								+ DBManager.dbUtil
 										.getGroupNameByGroupId(project

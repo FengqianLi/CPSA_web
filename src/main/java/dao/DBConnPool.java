@@ -48,7 +48,7 @@ class DBConnPool {
 		try {
 			String path = DBConnPool.class.getClassLoader().getResource("")
 					.toURI().getPath();
-			fis = new FileInputStream(path + "dbconfig.xml");
+			fis = new FileInputStream(path + "config.xml");
 			prop.loadFromXML(fis);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
@@ -62,30 +62,33 @@ class DBConnPool {
 
 		try {
 			// Add JDBC Driver into JVM
-			Class.forName(prop.getProperty("jdbc driver name"));
+			Class.forName(prop.getProperty("jdbc_driver_name"));
 
 			// Create general connection pool
 			GenericObjectPool connectionPool = new GenericObjectPool(null);
 
 			// Set the parameters of the connection pool
 			connectionPool.setMaxActive(Integer.parseInt(prop
-					.getProperty("max active num")));
+					.getProperty("max_active_num")));
 			connectionPool.setMaxIdle(Integer.parseInt(prop
-					.getProperty("max idle num")));
+					.getProperty("max_idle_num")));
 			connectionPool.setMaxWait(Integer.parseInt(prop
-					.getProperty("max wait num")));
+					.getProperty("max_wait_num")));
 
+			Properties userProp = new Properties();
+			userProp.setProperty("user", prop.getProperty("db_user"));
+			userProp.setProperty("password", prop.getProperty("db_password"));
 			ConnectionFactory connectionFactory = new DriverManagerConnectionFactory(
-					"jdbc:mysql://" + prop.getProperty("database ip") + ":"
-							+ prop.getProperty("database port") + "/"
-							+ prop.getProperty("database schema"), prop);
+					"jdbc:mysql://" + prop.getProperty("database_ip") + ":"
+							+ prop.getProperty("database_port") + "/"
+							+ prop.getProperty("database_schema"), userProp);
 
 			// Create PoolableConnectionFactory
 			new PoolableConnectionFactory(connectionFactory, connectionPool,
 					null, null, false, true);
 
 			// Create Connetion Pool Driver
-			Class.forName(prop.getProperty("pool driver name"));
+			Class.forName(prop.getProperty("pool_driver_name"));
 			PoolingDriver driver = (PoolingDriver) DriverManager
 					.getDriver("jdbc:apache:commons:dbcp:");
 
@@ -96,7 +99,7 @@ class DBConnPool {
 			e.printStackTrace();
 		}
 		logger.info("Create Connetion Pool：{} Successfully",
-				prop.getProperty("pool name"));
+				prop.getProperty("pool_name"));
 	}
 
 	/**
@@ -140,7 +143,7 @@ class DBConnPool {
 			PoolingDriver driver = (PoolingDriver) DriverManager
 					.getDriver("jdbc:apache:commons:dbcp:");
 			ObjectPool connectionPool = driver.getConnectionPool(prop
-					.getProperty("pool name"));
+					.getProperty("pool_name"));
 
 			logger.info("NumActive: {}", connectionPool.getNumActive());
 			logger.info("NumIdle: ", connectionPool.getNumIdle());
