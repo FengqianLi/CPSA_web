@@ -1,11 +1,6 @@
 package utils;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.InvalidPropertiesFormatException;
-import java.util.Properties;
+import protocol.Config;
 
 public class MailTo {
 
@@ -18,29 +13,12 @@ public class MailTo {
 	private String subject;
 
 	public MailTo() {
-		Properties prop = new Properties();
-		FileInputStream fis;
-		try {
-			String path = MailTo.class.getClassLoader().getResource("").toURI()
-					.getPath();
-			fis = new FileInputStream(path + "config.xml");
-			prop.loadFromXML(fis);
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (InvalidPropertiesFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-
-		this.serverHost = prop.getProperty("server_host");
-		this.ServerPort = prop.getProperty("server_port");
-		this.userName = prop.getProperty("mail_user");
-		this.password = prop.getProperty("mail_password");
-		this.fromAddress = prop.getProperty("from_address");
-		this.pageAddress = prop.getProperty("site_url")
+		this.serverHost = Config.prop.getProperty("server_host");
+		this.ServerPort = Config.prop.getProperty("server_port");
+		this.userName = Config.prop.getProperty("mail_user");
+		this.password = Config.prop.getProperty("mail_password");
+		this.fromAddress = Config.prop.getProperty("from_address");
+		this.pageAddress = Config.prop.getProperty("site_url")
 				+ "/resetPassword.jsp";
 		this.subject = "华为静态代码性能检测系统密码修改";
 	}

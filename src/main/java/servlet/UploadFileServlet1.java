@@ -30,6 +30,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import protocol.Config;
+
 import utils.Executor;
 import utils.MailTo;
 import utils.Pair;
@@ -99,23 +101,7 @@ public class UploadFileServlet1 extends HttpServlet {
 				submit.setAnalyzers(new String(analyzers));
 				int sId = DBManager.dbUtil.addSubmit(submit);
 
-				Properties pathProp = new Properties();
-				FileInputStream pathFis;
-				try {
-					String path = MailTo.class.getClassLoader().getResource("").toURI()
-							.getPath();
-					pathFis = new FileInputStream(path + "config.xml");
-					pathProp.loadFromXML(pathFis);
-				} catch (FileNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (InvalidPropertiesFormatException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (URISyntaxException e) {
-					e.printStackTrace();
-				}
-				String initPath = pathProp.getProperty("test_path")
+				String initPath = Config.prop.getProperty("test_path")
 						+ "/"
 						+ DBManager.dbUtil.getGroupNameByGroupId(project
 								.getGroupId()) + "/" + project.getProjectName();
