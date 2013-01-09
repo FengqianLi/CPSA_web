@@ -17,8 +17,10 @@
 <title>后台管理</title>
 </head>
 <body>
-	<h1>工程组管理</h1><a href="addGroup.jsp" target="main"> 增加一个项目组 </a>
-	<p><table width="80%" border="1" cellpadding="0" cellspacing="0"
+	<h1>工程组管理</h1>
+	<a href="addGroup.jsp" target="main"> 增加一个项目组 </a>
+	<p>
+	<table width="80%" border="1" cellpadding="0" cellspacing="0"
 		bgcolor="#9E7DB4" align="center">
 		<tr valign="top" bgcolor="#FFFFFF">
 			<td height="81">
@@ -30,23 +32,13 @@
 								<tr align="center" bgcolor="#7FB0C8">
 									<td width="50" height="20">编号</td>
 									<td width="300">组名</td>
-									<!-- <td width="50">编辑</td>
-									<td width="50">删除</td> -->
 								</tr>
 								<%
 									for (Group group : groupList) {
 								%>
-								<tr align="left" bgcolor="#FFFFFF">
+								<tr align="center" bgcolor="#FFFFFF">
 									<td height="20" align="center"><%=group.getGroupId()%></td>
 									<td><%=group.getGroupName()%></td>
-									<%-- <td align="center"><a
-										href="groupmodify.jsp?id=<%=group.getGroupId()%>">
-											<button>修改</button>
-									</a></td>
-									<td align="center"><a
-										href="groupdelete.jsp?id=<%=group.getGroupId()%>">
-											<button>删除</button>
-									</a></td> --%>
 									<%
 										}
 									%>
@@ -56,6 +48,6 @@
 				</table> <br>
 			</td>
 		</tr>
-	</table></p>
+	</table>
 </body>
 </html>

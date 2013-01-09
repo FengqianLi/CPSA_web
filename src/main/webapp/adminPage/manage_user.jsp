@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<link href="../css/adminmain.css" rel="stylesheet">
+<link href="../css/admin.css" rel="stylesheet">
 <title>用户管理</title>
 </head>
 <body>
@@ -29,13 +29,13 @@
 								cellspacing="1" bgcolor="#625D59">
 								<tr align="center" bgcolor="#7FB0C8">
 									<td width="100" height="20">编号</td>
-									<td width="150">用户名</td>
+									<td width="120">用户名</td>
 									<td width="300">工程分组</td>
 									<td width="100">角色</td>
 									<td width="200">电子邮箱</td>
-									<td width="100">状态</td>
-									<!-- <td width="150">编辑</td>
-									<td width="150">删除</td> -->
+									<td width="130">状态</td>
+									<td width="70">编辑</td>
+									<td width="70">删除</td>
 								</tr>
 								<%
 									for (User user : userList) {
@@ -47,15 +47,13 @@
 						.getGroupId())%></td>
 									<td align="center"><%=user.getRole()%></td>
 									<td align="center">&nbsp;<%=user.getEmail()%></td>
-									<td>&nbsp;<%=user.getStatus() == true ? "已激活" : "未激活"%></td>
-									<%-- <td align="center"><a
-										href="modify.jsp?id=<%=user.getUserId()%>">
-											<button>修改</button>
-									</a></td>
+									<td align="center">&nbsp;<%=user.getStatus() == true ? "已激活" : "未激活"%></td>
 									<td align="center"><a
-										href="delete.jsp?id=<%=user.getUserId()%>">
+										href="modify.jsp?id=<%=user.getUserId()%>"><button>编辑</button></a></td>
+									<td align="center"><a
+										href="../UserUpdate?id=<%=user.getUserId()%>&res=2">
 											<button>删除</button>
-									</a></td> --%>
+									</a></td>
 									<%
 										}
 									%>

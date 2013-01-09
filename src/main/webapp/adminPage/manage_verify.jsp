@@ -14,10 +14,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <link href="../css/admin.css" rel="stylesheet">
-<title>用户管理</title>
+<title>审核注册用户</title>
 </head>
 <body>
-	<h1>用户管理</h1>
+	<h1>审核注册用户</h1>
 	<table width="80%" border="1" cellpadding="0" cellspacing="0"
 		bgcolor="#9E7DB4" align="center">
 		<tr valign="top" bgcolor="#FFFFFF">
@@ -48,14 +48,13 @@
 									<td><%=user.getRole()%></td>
 									<td><%=user.getEmail()%></td>
 									<td><%=user.getStatus() == true ? "已激活" : "未激活"%></td>
-									<td><a href="../UserVerify?id=<%=user.getUserId()%>&res=1"><button>通过</button></a></td>
-									<td><a href="../UserVerify?id=<%=user.getUserId()%>&res=0">
+									<td><a href="../UserUpdate?id=<%=user.getUserId()%>&res=1"><button>通过</button></a></td>
+									<td><a href="../UserUpdate?id=<%=user.getUserId()%>&res=0">
 											<button>删除</button>
 									</a></td>
 									<%
 										}
 									%>
-								
 							</table></td>
 					</tr>
 				</table> <br>

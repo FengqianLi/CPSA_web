@@ -14,33 +14,39 @@
 <link href="../css/modify.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<form id="modify" method="post" action="modify_ok.jsp">
+	<form id="modify" method="post" action="../UpdateUser">
 		<h1>修改资料</h1>
-		用户名:<input id="username" type="text" name="username"
-			onblur="checkname()" value="<%=user.getUserName()%>"> <br />
-		密码:&nbsp;&nbsp;&nbsp;<input id="password" type="password"
-			name="password" value="<%=user.getPassword()%>"> <br />
-		组别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="group">
+		<input type="hidden" name="id" value="<%=user.getUserId()%>">
+		用户名:<%=user.getUserName()%><br /> 组别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select
+			name="group">
 			<%
 				for (Group group : groupList) {
 			%>
-			<option value="group.getGroupId()"><%=group.getGroupName()%></option>
+			<option value="<%=group.getGroupId()%>"
+				<%if (user.getGroupId() == group.getGroupId()) {%>
+				selected="selected" <%}%>><%=group.getGroupName()%></option>
 			<%
 				}
 			%>
-		</select><br /> 角色:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="role"
-			value="leader">
-			<option value="member">member</option>
-			<option value="leader">leader</option>
-			<option value="manager">manager</option>
-			<option value="admin">admin</option>
-		</select><br /> 邮箱:&nbsp;&nbsp;&nbsp;<input id="email" type="email"
-			name="email" value="<%=user.getEmail()%>"> <br />
+
+		</select><br /> 角色:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="role">
+			<option value="member"
+				<%if (user.getRole().compareTo("member") == 0) {%>
+				selected="selected" <%}%>>member</option>
+			<option value="leader"
+				<%if (user.getRole().compareTo("leader") == 0) {%>
+				selected="selected" <%}%>>leader</option>
+			<option value="manager"
+				<%if (user.getRole().compareTo("manager") == 0) {%>
+				selected="selected" <%}%>>manager</option>
+			<option value="admin"
+				<%if (user.getRole().compareTo("admin") == 0) {%>
+				selected="selected" <%}%>>admin</option>
+		</select><br /> 邮箱:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=user.getEmail()%>
+		<br />
 		<fieldset id="actions">
 			<input type="submit" id="submit" value="提交">
 		</fieldset>
-		</table>
-	</form>
 	</form>
 </body>
 </html>

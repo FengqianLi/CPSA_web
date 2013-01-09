@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<link href="../css/adminmain.css" rel="stylesheet">
+<link href="../css/admin.css" rel="stylesheet">
 <title>后台管理</title>
 </head>
 <body>
@@ -34,8 +34,7 @@
 									<td width="200">工程分组</td>
 									<td width="100">创建者</td>
 									<td width="160">是否公开</td>
-								<!-- 	<td width="100">编辑</td>
-									<td width="100">删除</td> -->
+									<td width="100">删除</td>
 								</tr>
 								<%
 									for (Project project : projectList) {
@@ -49,16 +48,9 @@
 									<td align="center"><%=DBManager.dbUtil.getUserNameByUserId(project
 						.getOwnerId())%></td>
 									<td align="center">&nbsp;<%=project.getVisible() == true ? "是" : "否"%></td>
-									<%-- <td align="center">
-										<a
-										href="modify.jsp?id=<%=project.getProjectId()%>">
-										<button>修改</button> </a>
-									</td>
-									<td align="center">
-										<a
-										href="delete.jsp?id=<%=project.getProjectId()%>">
-										<button>删除</button> </a>
-									</td> --%>
+									<td align="center"><a href="../ProjectDelete?id=<%=project.getProjectId()%>">
+											<button>删除</button>
+									</a></td>
 									<%
 										}
 									%>

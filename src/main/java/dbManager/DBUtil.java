@@ -341,12 +341,12 @@ public class DBUtil {
 
 	public ArrayList<Project> getProjectList() {
 		String sql = "select * from Project";
+		ArrayList<Project> projectList = new ArrayList<Project>();
 		ResultSet rs = anAgent.select(sql);
 		try {
 			if (!rs.next()) {
-				return null;
+				return projectList;
 			}
-			ArrayList<Project> projectList = new ArrayList<Project>();
 			do {
 				Project project = new Project();
 				project.setProjectId(rs.getInt("pid"));
@@ -361,7 +361,7 @@ public class DBUtil {
 			return projectList;
 
 		} catch (SQLException e) {
-			return null;
+			return projectList;
 		}
 	}
 
@@ -505,12 +505,12 @@ public class DBUtil {
 			sql = "";
 		}
 
+		ArrayList<Project> projectList = new ArrayList<Project>();
 		ResultSet rs = anAgent.select(sql);
 		try {
 			if (!rs.next()) {
-				return null;
+				return projectList;
 			}
-			ArrayList<Project> projectList = new ArrayList<Project>();
 			do {
 				Project project = new Project();
 				project.setProjectId(rs.getInt("pid"));
@@ -525,7 +525,7 @@ public class DBUtil {
 			return projectList;
 
 		} catch (SQLException e) {
-			return null;
+			return projectList;
 		}
 	}
 
@@ -545,12 +545,12 @@ public class DBUtil {
 			sql = "";
 		}
 
+		ArrayList<Project> projectList = new ArrayList<Project>();
 		ResultSet rs = anAgent.select(sql);
 		try {
 			if (!rs.next()) {
-				return null;
+				return projectList;
 			}
-			ArrayList<Project> projectList = new ArrayList<Project>();
 			do {
 				Project project = new Project();
 				project.setProjectId(rs.getInt("pid"));
@@ -565,18 +565,18 @@ public class DBUtil {
 			return projectList;
 
 		} catch (SQLException e) {
-			return null;
+			return projectList;
 		}
 	}
 
 	public ArrayList<Analyzer> getAnalyzerList() {
 		String sql = "select * from Analyzer";
+		ArrayList<Analyzer> analyzerList = new ArrayList<Analyzer>();		
 		ResultSet rs = anAgent.select(sql);
 		try {
 			if (!rs.next()) {
-				return null;
+				return analyzerList;
 			}
-			ArrayList<Analyzer> analyzerList = new ArrayList<Analyzer>();
 			do {
 				Analyzer analyzer = new Analyzer();
 				analyzer.setAId(rs.getInt("aid"));
@@ -588,7 +588,7 @@ public class DBUtil {
 
 			return analyzerList;
 		} catch (SQLException e) {
-			return null;
+			return analyzerList;
 		}
 	}
 
@@ -605,12 +605,12 @@ public class DBUtil {
 				+ "/%' and name not in (select name from SubmitFile where name like '"
 				+ directory + "/%/%')";
 
+		ArrayList<AnalyzeResult> analyzeResultList = new ArrayList<AnalyzeResult>();
 		ResultSet rs = anAgent.select(sql);
 		try {
 			if (!rs.next()) {
-				return null;
+				return analyzeResultList;
 			}
-			ArrayList<AnalyzeResult> analyzeResultList = new ArrayList<AnalyzeResult>();
 			do {
 				AnalyzeResult analyzeResult = new AnalyzeResult();
 				analyzeResult.setSid(sid);
@@ -640,7 +640,7 @@ public class DBUtil {
 			return analyzeResultList;
 
 		} catch (SQLException e) {
-			return null;
+			return analyzeResultList;
 		}
 	}
 
@@ -703,12 +703,12 @@ public class DBUtil {
 	 */
 	public ArrayList<Group> getGroupList() {
 		String sql = "select * from GroupInfo where name != 'Admin' order by gid";
+		ArrayList<Group> groupList = new ArrayList<Group>();
 		ResultSet rs = anAgent.select(sql);
 		try {
 			if (!rs.next()) {
-				return null;
+				return groupList;
 			}
-			ArrayList<Group> groupList = new ArrayList<Group>();
 			do {
 				Group group = new Group();
 				group.setGroupId(rs.getInt("gid"));
@@ -719,7 +719,7 @@ public class DBUtil {
 			return groupList;
 
 		} catch (SQLException e) {
-			return null;
+			return groupList;
 		}
 	}
 
@@ -839,6 +839,18 @@ public class DBUtil {
 		}
 	}
 
+	public boolean deleteProject(int pid) {
+		String sql = "delete from Project where pid = " + pid;
+		try {
+			if (anAgent.delete(sql) == -1) // Not Connect!
+				return false;
+			else
+				return true;
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+
 	/**
 	 * Update the information of a Group, 使用在更改一个分组的名称等情况
 	 * 
@@ -881,14 +893,13 @@ public class DBUtil {
 	}
 
 	public ArrayList<User> getUserList() {
-		String sql = "select * from UserInfo where active = true";
-
+		String sql = "select * from UserInfo where active = true and name != 'admin'";
+		ArrayList<User> userList = new ArrayList<User>();
 		ResultSet rs = anAgent.select(sql);
 		try {
 			if (!rs.next()) {
-				return null;
+				return userList;
 			}
-			ArrayList<User> userList = new ArrayList<User>();
 			do {
 				User user = new User();
 				user.setUserId(rs.getInt("uid"));
@@ -904,7 +915,7 @@ public class DBUtil {
 			return userList;
 
 		} catch (SQLException e) {
-			return null;
+			return userList;
 		}
 	}
 

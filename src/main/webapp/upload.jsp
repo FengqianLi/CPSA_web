@@ -48,6 +48,9 @@
 		<div id="content">
 			<%
 				if (1 == mode) {
+					if (visibleProjectList.size() == 0) {
+						out.println("<h2>没有工程</h2>");
+					} else {
 			%>
 			<form id="uploadForm" name="uploadForm" method="post"
 				action="UploadFile1" enctype="multipart/form-data">
@@ -61,12 +64,12 @@
 					<ul>
 						<%
 							for (Project project : visibleProjectList) {
-									String projectName = project.getProjectName();
-									int pId = project.getProjectId();
-									boolean visible = project.getVisible();
-									String description = project.getDescription();
-									String groupName = DBManager.dbUtil
-											.getGroupNameByGroupId(project.getGroupId());
+										String projectName = project.getProjectName();
+										int pId = project.getProjectId();
+										boolean visible = project.getVisible();
+										String description = project.getDescription();
+										String groupName = DBManager.dbUtil
+												.getGroupNameByGroupId(project.getGroupId());
 						%>
 						<p>
 							<input type="radio" name="pId" value="<%=pId%>" /><%=projectName%>
@@ -106,6 +109,7 @@
 				</p>
 			</form>
 			<%
+				}
 				} else if (2 == mode) {
 			%>
 			<form id="uploadForm" name="uploadForm" method="post"
@@ -144,6 +148,10 @@
 			</form>
 			<%
 				} else if (3 == mode) {
+					if (recompilableProjectList.size() == 0) {
+						out.println("<h2>没有工程</h2>");
+					}
+					else {
 			%>
 
 			<form id="uploadForm" name="uploadForm" method="post"
@@ -153,12 +161,12 @@
 					<ul>
 						<%
 							for (Project project : recompilableProjectList) {
-									String projectName = project.getProjectName();
-									int pId = project.getProjectId();
-									boolean visible = project.getVisible();
-									String description = project.getDescription();
-									String groupName = DBManager.dbUtil
-											.getGroupNameByGroupId(project.getGroupId());
+										String projectName = project.getProjectName();
+										int pId = project.getProjectId();
+										boolean visible = project.getVisible();
+										String description = project.getDescription();
+										String groupName = DBManager.dbUtil
+												.getGroupNameByGroupId(project.getGroupId());
 						%>
 						<p>
 							<input type="radio" name="projectId" value="<%=pId%>" /><%=projectName%>
@@ -194,6 +202,7 @@
 					<input class="button" type="submit" value="重新编译" />
 				</p>
 				<%
+					}
 					}
 				%>
 			</form>
