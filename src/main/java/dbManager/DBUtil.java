@@ -28,7 +28,6 @@ public class DBUtil {
 
 	/**
 	 * Get the User model by userId, 使用在用户登入
-	 * 
 	 * @param userName
 	 * @return the User model or null if no such userId exists
 	 */
