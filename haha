@@ -1,3 +1,6 @@
+
+
+
 drop database if exists huawei;
 create database huawei;
 
