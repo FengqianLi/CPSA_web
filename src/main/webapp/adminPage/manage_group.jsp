@@ -13,12 +13,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<link href="../css/adminmain.css" rel="stylesheet">
+<link href="../css/admin.css" rel="stylesheet">
 <title>后台管理</title>
 </head>
 <body>
 	<h1>工程组管理</h1>
-	<a href="addGroup.jsp" target="main"> 增加一个项目组 </a>
+	<a href="addGroup.jsp" target="main"> <h2><center>增加一个项目组</center></h2> </a>
 	<p>
 	<table width="80%" border="1" cellpadding="0" cellspacing="0"
 		bgcolor="#9E7DB4" align="center">

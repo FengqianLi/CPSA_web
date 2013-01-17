@@ -102,10 +102,11 @@
 				<%
 					String nameWithoutPath = name
 								.substring(name.lastIndexOf("/") + 1);
-						if (name.endsWith(".cpp")) {	
+						if (name.endsWith(".cpp")) {
 							out.println(nameWithoutPath);
-							String html_url1 = DBManager.dbUtil.getGroupNameBySid(
-									Integer.parseInt(sid[0])).replace(" ", "_")
+							String html_url1 = "result/"
+									+ DBManager.dbUtil.getGroupNameBySid(
+											Integer.parseInt(sid[0])).replace(" ", "_")
 									+ "/"
 									+ DBManager.dbUtil.getProjectNameBySid(
 											Integer.parseInt(sid[0])).replace(" ", "_")
@@ -114,14 +115,15 @@
 							out.println("<a href=\"" + html_url1
 									+ "\" target=\"_blank\">[1]</a>");
 
-							String html_url2 = DBManager.dbUtil.getGroupNameBySid(
-									Integer.parseInt(sid[1])).replace(" ", "_")
+							String html_url2 = "result/"
+									+ DBManager.dbUtil.getGroupNameBySid(
+											Integer.parseInt(sid[1])).replace(" ", "_")
 									+ "/"
 									+ DBManager.dbUtil.getProjectNameBySid(
 											Integer.parseInt(sid[1])).replace(" ", "_")
 									+ "/";
 							html_url2 += name.replace("cpp", "cpp." + sid[1] + ".html");
-							out.println("<a href=\"" + html_url1
+							out.println("<a href=\"" + html_url2
 									+ "\" target=\"_blank\"> [2]</a>");
 				%>
 				<a
