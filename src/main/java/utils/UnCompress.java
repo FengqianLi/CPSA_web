@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import org.apache.tools.zip.ZipEntry;
@@ -18,11 +19,12 @@ public class UnCompress {
 			.getLogger(UnCompress.class);
 	private static OutputStream outputStream;
 
-	public static void unZip(String zipfile, String destDir) {
+	public static ArrayList<String> unZip(String zipfile, String destDir) {
 
 		logger.debug("upziping file: {}", zipfile);
+		ArrayList<String> unzippedFileList = new ArrayList<String>();
 
-		destDir = destDir.endsWith("//") ? destDir : destDir + "//";
+		destDir = destDir.endsWith("/") ? destDir : destDir + "/";
 		byte b[] = new byte[1024];
 		int length;
 
@@ -36,6 +38,7 @@ public class UnCompress {
 			while (enumeration.hasMoreElements()) {
 				zipEntry = (ZipEntry) enumeration.nextElement();
 				File loadFile = new File(destDir + zipEntry.getName());
+				unzippedFileList.add(loadFile.getAbsolutePath());
 
 				if (zipEntry.isDirectory()) {
 					loadFile.mkdirs();
@@ -48,12 +51,13 @@ public class UnCompress {
 
 					while ((length = inputStream.read(b)) > 0)
 						outputStream.write(b, 0, length);
-
 				}
 			}
 			logger.debug("unCompress file {} success!", zipfile);
+			return unzippedFileList;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return unzippedFileList;
 		}
 	}
 }

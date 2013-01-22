@@ -41,7 +41,7 @@ class DBConnPool {
 	private static void setupPool() {
 		logger.info("Initializing the Connetion Pool......");
 
-		Config.prop.list(System.out);
+		// Config.prop.list(System.out);
 		try {
 			// Add JDBC Driver into JVM
 			Class.forName(Config.prop.getProperty("jdbc_driver_name"));

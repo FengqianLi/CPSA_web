@@ -25,8 +25,8 @@
 	<entry key="from_address">kiddlee_zj@163.com</entry>
 
 	<!-- path Configuration -->
-	<entry key="test_path">/home/damon/test</entry>
-	<entry key="run_path">/home/damon/Workspace/test/run.sh</entry>
+	<entry key="test_path">/home/damon/Workspace/yy/plugin-dev/test</entry>
+	<entry key="run_path">/home/damon/Workspace/yy/plugin-dev/run.sh</entry>
 
 	<!-- Site Configuration -->
 	<entry key="site_url">localhost:8080/CPSA_web</entry>

@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import utils.FileType;
-import utils.ListFile;
 import utils.UnCompress;
 import dbManager.DBManager;
 
@@ -55,18 +54,16 @@ public class SubmitManager implements DBManager {
 			String path = fullFilePath.substring(0, index + 1);
 			String fileName = fullFilePath.substring(index + 1,
 					fullFilePath.length());
-			String unCompressedDir = null;
+			ArrayList<String> fileList = new ArrayList<String>();
 			if (fullFilePath.endsWith(".zip")) {
-				UnCompress.unZip(path + fileName, path);
-				unCompressedDir = fileName.replace(".zip", "");
+				fileList = UnCompress.unZip(path + fileName, path);
 			} else if (fileName.endsWith("rar")) {
 
 			}
 
-			ListFile lister = new ListFile(path + unCompressedDir);
-			ArrayList<String> list = lister.getFileList();
-			for (String str : list) {
-				addFile(projectPath, str, sId, pId);
+			for (String file : fileList) {
+				logger.debug("list: {}", file);
+				addFile(projectPath, file, sId, pId);
 			}
 		}
 	}

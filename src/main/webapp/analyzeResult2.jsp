@@ -132,9 +132,9 @@
 
 				<%
 					} else {
-							out.println("<a href=\"./analyzeResult.jsp?sid=" + sid
-									+ "&directory=" + name + "\">" + nameWithoutPath
-									+ "</a>");
+							out.println("<a href=\"./analyzeResult2.jsp?sid1=" + sid[0]
+									+ "&sid2=" + sid[1] + "&directory=" + name + "\">"
+									+ nameWithoutPath + "</a>");
 						}
 				%>
 			</div>
