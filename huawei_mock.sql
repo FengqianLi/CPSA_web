@@ -115,9 +115,9 @@ insert into Analyzer(name, description) values('FunctionParameterAnalyzer', 'Fun
 insert into Analyzer(name, description) values('StructPrmsAnalyzer', 'StructPrmsAnalyzer');
 
 insert into GroupInfo(name) values('Manager');
-insert into GroupInfo(name) values('Compiler_Group');
-insert into GroupInfo(name) values('Test_Tool_Group');
-insert into GroupInfo(name) values('Network_Group');
+insert into GroupInfo(name) values('Compiler Group');
+insert into GroupInfo(name) values('Test Tool Group');
+insert into GroupInfo(name) values('Network Group');
 insert into GroupInfo(name) values('Admin');
 
 insert into UserInfo(name, password, email, role, gid, active) values('lfq', 'E10ADC3949BA59ABBE56E057F20F883E', 'lfq@gmail.com', 'member', 2, true);

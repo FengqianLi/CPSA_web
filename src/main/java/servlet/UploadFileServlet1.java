@@ -35,6 +35,7 @@ import protocol.Config;
 import utils.Executor;
 import utils.MailTo;
 import utils.Pair;
+import utils.Replace;
 
 import dbManager.DBManager;
 
@@ -101,19 +102,20 @@ public class UploadFileServlet1 extends HttpServlet {
 				submit.setAnalyzers(new String(analyzers));
 				int sId = DBManager.dbUtil.addSubmit(submit);
 
-				String initPath = Config.prop.getProperty("test_path")
+				String initPath = (Config.prop.getProperty("test_path")
 						+ "/"
 						+ DBManager.dbUtil.getGroupNameByGroupId(project
-								.getGroupId()) + "/" + project.getProjectName();
+								.getGroupId()) + "/" + project.getProjectName());
 				for (Pair pair : fileList) {
-					String projectPath = initPath;
+					String projectPath = Replace.replaceAll(initPath);
 					logger.trace("Pairs: {} : {}", pair.directory,
 							pair.uploadFileName);
 
-					String dir = (pair.directory.startsWith("/")) ? pair.directory
-							: "/" + pair.directory;
+					String dir = Replace.replaceAll(((pair.directory
+							.startsWith("/")) ? pair.directory : "/"
+							+ pair.directory));
 					dir += dir.endsWith("/") ? "" : "/";
-					String fileName = pair.uploadFileName;
+					String fileName = Replace.replaceAll(pair.uploadFileName);
 					if (fileName != null && fileName.compareTo("") != 0) {
 						File dirFile = new File(projectPath + dir);
 						if (!dirFile.exists())

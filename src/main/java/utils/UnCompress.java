@@ -37,7 +37,8 @@ public class UnCompress {
 
 			while (enumeration.hasMoreElements()) {
 				zipEntry = (ZipEntry) enumeration.nextElement();
-				File loadFile = new File(destDir + zipEntry.getName());
+				File loadFile = new File(destDir
+						+ Replace.replaceAll(zipEntry.getName()));
 				unzippedFileList.add(loadFile.getAbsolutePath());
 
 				if (zipEntry.isDirectory()) {

@@ -33,6 +33,7 @@ import protocol.Config;
 
 import utils.Executor;
 import utils.MailTo;
+import utils.Replace;
 
 import dbManager.DBManager;
 
@@ -93,13 +94,14 @@ public class UploadFileServlet2 extends HttpServlet {
 						submit.setAnalyzers(new String(analyzers));
 						submit.setSubmitId(DBManager.dbUtil.addSubmit(submit));
 
-						String projectPath = Config.prop.getProperty("test_path")
+						String projectPath = Replace.replaceAll((Config.prop
+								.getProperty("test_path")
 								+ "/"
 								+ DBManager.dbUtil
 										.getGroupNameByGroupId(project
-												.getGroupId()) + "/"
-								+ project.getProjectName();
-						String fileName = item.getName();
+												.getGroupId()) + "/" + project
+								.getProjectName()));
+						String fileName = Replace.replaceAll(item.getName());
 						logger.trace("fileName: {}", fileName);
 						if (fileName != null && fileName.compareTo("") != 0) {
 							File dirFile = new File(projectPath);
