@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="javabeans.AnalyzeResult, dbManager.DBManager"%>
+<%@page
+	import="javabeans.AnalyzeResult, dbManager.DBManager, utils.FileType"%>
 <%@page import="java.util.HashMap, java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -71,14 +72,22 @@
 				<%
 					String nameWithoutPath = name
 								.substring(name.lastIndexOf("/") + 1);
-						if (name.endsWith(".cpp")) {
+						if (FileType.isSourceCode(name)) {
 							String html_url = "result/"
 									+ DBManager.dbUtil.getGroupNameBySid(sid).replace(
 											" ", "_")
 									+ "/"
 									+ DBManager.dbUtil.getProjectNameBySid(sid)
 											.replace(" ", "_") + "/";
-							html_url += name.replace("cpp", "cpp." + sid + ".html");
+							if (name.contains("cpp"))
+								html_url += name.replace("cpp", "cpp." + sid + ".html");
+							else if (name.contains("cc"))
+								html_url += name.replace("cc", "cc." + sid + ".html");
+							else if (name.contains("h"))
+								html_url += name.replace("h", "h." + sid + ".html");
+							else if (name.contains("c"))
+								html_url += name.replace("c", "c." + sid + ".html");
+
 							out.println("<a href=\"" + html_url
 									+ "\" target=\"_blank\">" + nameWithoutPath
 									+ "</a>");

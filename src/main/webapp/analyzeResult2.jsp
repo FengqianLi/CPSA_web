@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="javabeans.AnalyzeResult, dbManager.DBManager"%>
+<%@page
+	import="javabeans.AnalyzeResult, dbManager.DBManager,  utils.FileType"%>
 <%@page
 	import="java.util.HashSet,java.util.HashMap,  java.util.ArrayList, java.util.Iterator"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -102,7 +103,7 @@
 				<%
 					String nameWithoutPath = name
 								.substring(name.lastIndexOf("/") + 1);
-						if (name.endsWith(".cpp")) {
+						if (FileType.isSourceCode(name)) {
 							out.println(nameWithoutPath);
 							String html_url1 = "result/"
 									+ DBManager.dbUtil.getGroupNameBySid(
