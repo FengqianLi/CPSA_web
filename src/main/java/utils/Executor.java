@@ -19,6 +19,25 @@ public class Executor {
 		logger.debug(Config.prop.getProperty("run_path") + " " + sId);
 		try {
 			Process proc = Runtime.getRuntime().exec(cmd);
+
+			StreamGobbler errorGobbler = new StreamGobbler(
+					proc.getErrorStream(), "ERROR");
+
+			// kick off stderr
+			errorGobbler.start();
+
+			StreamGobbler outGobbler = new StreamGobbler(proc.getInputStream(),
+					"STDOUT");
+			// kick off stdout
+			outGobbler.start();
+
+			// BufferedReader in = new BufferedReader(new InputStreamReader(
+			// proc.getInputStream()));
+			// String line;
+			// while ((line = in.readLine()) != null) {
+			// System.out.println(line);
+			// logger.debug(line);
+			// }
 			proc.waitFor();
 		} catch (IOException e) {
 			e.printStackTrace();

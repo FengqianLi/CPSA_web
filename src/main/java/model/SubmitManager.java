@@ -37,18 +37,19 @@ public class SubmitManager implements DBManager {
 			while (tmpStr.length() > "./".length()) {
 				dbUtil.addSubmitFile(sId, tmpStr);
 				dbUtil.addProjectFile(pId, tmpStr);
-				logger.debug("add dir: {}", tmpStr);
+				// logger.debug("add dir: {}", tmpStr);
 				tmpStr = tmpStr.substring(0, tmpStr.lastIndexOf("/"));
 			}
 		}
 		if (FileType.isDir(fullFilePath)) {
 			dbUtil.addSubmitFile(sId, relativeFilePath);
 			dbUtil.addProjectFile(pId, relativeFilePath);
-			logger.debug("add submit file of dir: {}", relativeFilePath);
+			// logger.debug("add submit file of dir: {}", relativeFilePath);
 		} else if (FileType.isSourceCode(fullFilePath)) {
 			dbUtil.addSubmitFile(sId, relativeFilePath);
 			dbUtil.addProjectFile(pId, relativeFilePath);
-			logger.debug("add submit file of source code: {}", relativeFilePath);
+			// logger.debug("add submit file of source code: {}",
+			// relativeFilePath);
 		} else if (FileType.isCompressedFile(fullFilePath)) {
 			index = fullFilePath.lastIndexOf("/");
 			String path = fullFilePath.substring(0, index + 1);
@@ -62,7 +63,7 @@ public class SubmitManager implements DBManager {
 			}
 
 			for (String file : fileList) {
-				logger.debug("list: {}", file);
+				// logger.debug("list: {}", file);
 				addFile(projectPath, file, sId, pId);
 			}
 		}
