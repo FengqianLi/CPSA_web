@@ -28,6 +28,7 @@ public class DBUtil {
 
 	/**
 	 * Get the User model by userId, 使用在用户登入
+	 * 
 	 * @param userName
 	 * @return the User model or null if no such userId exists
 	 */
@@ -570,7 +571,7 @@ public class DBUtil {
 
 	public ArrayList<Analyzer> getAnalyzerList() {
 		String sql = "select * from Analyzer";
-		ArrayList<Analyzer> analyzerList = new ArrayList<Analyzer>();		
+		ArrayList<Analyzer> analyzerList = new ArrayList<Analyzer>();
 		ResultSet rs = anAgent.select(sql);
 		try {
 			if (!rs.next()) {
@@ -580,7 +581,9 @@ public class DBUtil {
 				Analyzer analyzer = new Analyzer();
 				analyzer.setAId(rs.getInt("aid"));
 				analyzer.setName(rs.getString("name"));
+				analyzer.setErrorId(rs.getString("errorId"));
 				analyzer.setDescription(rs.getString("description"));
+				analyzer.setSolution(rs.getString("solution"));
 
 				analyzerList.add(analyzer);
 			} while (rs.next());
@@ -588,6 +591,28 @@ public class DBUtil {
 			return analyzerList;
 		} catch (SQLException e) {
 			return analyzerList;
+		}
+	}
+
+	public Analyzer getAnalyzerByAnalyzerName(String analyzerName) {
+		String sql = "select * from Analyzer where name = '" + analyzerName + "'";
+
+		ResultSet rs = anAgent.select(sql);
+		try {
+			if (!rs.next()) {
+				return null;
+			}
+
+			Analyzer analyzer = new Analyzer();
+			analyzer.setAId(rs.getInt("aid"));
+			analyzer.setName(rs.getString("name"));
+			analyzer.setErrorId(rs.getString("errorId"));
+			analyzer.setDescription(rs.getString("description"));
+			analyzer.setSolution(rs.getString("solution"));
+
+			return analyzer;
+		} catch (SQLException e) {
+			return null;
 		}
 	}
 

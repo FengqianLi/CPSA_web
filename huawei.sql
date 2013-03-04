@@ -37,8 +37,11 @@ create table Project(
 create table Analyzer(
 	aid int not null primary key auto_increment,
 	name varchar(255) not null,
+    errorId varchar(255) not null,
 	description varchar(255),
-    unique (name)
+    solution varchar(255) not null,
+    unique (name),
+    unique (errorId)
 )default charset=utf8 TYPE=InnoDB;
 
 create table Submit(
@@ -87,32 +90,32 @@ create table AnalyzeResult(
 
 
 -- insert the analyzer infomations
-insert into Analyzer(name, description) values('GlobalVarSizeAnalyzer', 'GlobalVarSizeAnalyzer');
-insert into Analyzer(name, description) values('ForLoopCombineAnalyzer', 'ForLoopCombineAnalyzer');
-insert into Analyzer(name, description) values('InitializeArrayByForLoopAnalyzer', 'InitializeArrayByForLoopAnalyzer');
-insert into Analyzer(name, description) values('IfToSwitchAnalyzer', 'IfToSwitchAnalyzer');
-insert into Analyzer(name, description) values('DivideByTwosExponentAnalyzer', 'DivideByTwosExponentAnalyzer');
-insert into Analyzer(name, description) values('FunctionCallAnalyzer', 'FunctionCallAnalyzer');
-insert into Analyzer(name, description) values('BadMemOperationCallAnalyzer', 'BadMemOperationCallAnalyzer');
-insert into Analyzer(name, description) values('AssignToConstantAnalyzer', 'AssignToConstantAnalyzer');
-insert into Analyzer(name, description) values('ForLoopToZeroAnalyzer', 'ForLoopToZeroAnalyzer');
-insert into Analyzer(name, description) values('SqrtAnalyzer', 'SqrtAnalyzer');
-insert into Analyzer(name, description) values('LoopDivideAnalyzer', 'LoopDivideAnalyzer');
-insert into Analyzer(name, description) values('LocalVarSizeAnalyzer', 'LocalVarSizeAnalyzer');
-insert into Analyzer(name, description) values('MultiplyByTwosExponentAnalyzer', 'MultiplyByTwosExponentAnalyzer');
-insert into Analyzer(name, description) values('RealDivisionAnalyzer', 'RealDivisionAnalyzer');
-insert into Analyzer(name, description) values('MemApplyAnalyzer', 'MemApplyAnalyzer');
-insert into Analyzer(name, description) values('FunctionAsLoopVarAnalyzer', 'FunctionAsLoopVarAnalyzer');
-insert into Analyzer(name, description) values('StructSizeAnalyzer', 'StructSizeAnalyzer');
-insert into Analyzer(name, description) values('BitNotExprAnalyzer', 'BitNotExprAnalyzer');
-insert into Analyzer(name, description) values('StringCopyAnalyzer', 'StringCopyAnalyzer');
-insert into Analyzer(name, description) values('FunctionCodeSizeAnalyzer', 'FunctionCodeSizeAnalyzer');
-insert into Analyzer(name, description) values('GeAndLeCondAnalyzer', 'GeAndLeCondAnalyzer');
-insert into Analyzer(name, description) values('ConditionInLoopAnalyzer', 'ConditionInLoopAnalyzer');
-insert into Analyzer(name, description) values('FindSameFunctionAnalyzer', 'FindSameFunctionAnalyzer');
-insert into Analyzer(name, description) values('MultiConditionAnalyzer', 'MultiConditionAnalyzer');
-insert into Analyzer(name, description) values('FunctionParameterAnalyzer', 'FunctionParameterAnalyzer');
-insert into Analyzer(name, description) values('StructPrmsAnalyzer', 'StructPrmsAnalyzer');
+insert into Analyzer(name, errorId, description, solution) values('GlobalVarSizeAnalyzer', '1.1', 'GlobalVarSizeAnalyzer', 'solution to 1.1');
+insert into Analyzer(name, errorId, description, solution) values('ForLoopCombineAnalyzer', '1.2', 'ForLoopCombineAnalyzer', 'solution to 1.2');
+insert into Analyzer(name, errorId, description, solution) values('InitializeArrayByForLoopAnalyzer', '1.3', 'InitializeArrayByForLoopAnalyzer', 'solution to 1.3');
+insert into Analyzer(name, errorId, description, solution) values('IfToSwitchAnalyzer', '1.4', 'IfToSwitchAnalyzer', 'solution to 1.4');
+insert into Analyzer(name, errorId, description, solution) values('DivideByTwosExponentAnalyzer', '2.1', 'DivideByTwosExponentAnalyzer', 'solution to 2.1');
+insert into Analyzer(name, errorId, description, solution) values('FunctionCallAnalyzer', '2.2', 'FunctionCallAnalyzer', 'solution to 2.2');
+insert into Analyzer(name, errorId, description, solution) values('BadMemOperationCallAnalyzer', '2.3', 'BadMemOperationCallAnalyzer', 'solution to 2.3');
+insert into Analyzer(name, errorId, description, solution) values('AssignToConstantAnalyzer', '2.4', 'AssignToConstantAnalyzer', 'solution to 2.4');
+insert into Analyzer(name, errorId, description, solution) values('ForLoopToZeroAnalyzer', '3.1', 'ForLoopToZeroAnalyzer', 'solution to 3.1');
+insert into Analyzer(name, errorId, description, solution) values('SqrtAnalyzer', '3.2', 'SqrtAnalyzer', 'solution to 3.2');
+insert into Analyzer(name, errorId, description, solution) values('LoopDivideAnalyzer', '3.3', 'LoopDivideAnalyzer', 'solution to 3.3');
+insert into Analyzer(name, errorId, description, solution) values('LocalVarSizeAnalyzer', '3.4', 'LocalVarSizeAnalyzer', 'solution to 3.4');
+insert into Analyzer(name, errorId, description, solution) values('MultiplyByTwosExponentAnalyzer', '4.1', 'MultiplyByTwosExponentAnalyzer', 'solution to 4.1');
+insert into Analyzer(name, errorId, description, solution) values('RealDivisionAnalyzer', '4.2', 'RealDivisionAnalyzer', 'solution to 4.2');
+insert into Analyzer(name, errorId, description, solution) values('MemApplyAnalyzer', '4.3', 'MemApplyAnalyzer', 'solution to 4.3');
+insert into Analyzer(name, errorId, description, solution) values('FunctionAsLoopVarAnalyzer', '4.4', 'FunctionAsLoopVarAnalyzer', 'solution to 4.4');
+insert into Analyzer(name, errorId, description, solution) values('StructSizeAnalyzer', '5.1', 'StructSizeAnalyzer', 'solution to 5.1');
+insert into Analyzer(name, errorId, description, solution) values('BitNotExprAnalyzer', '5.2', 'BitNotExprAnalyzer', 'solution to 5.2');
+insert into Analyzer(name, errorId, description, solution) values('StringCopyAnalyzer', '5.3', 'StringCopyAnalyzer', 'solution to 5.3');
+insert into Analyzer(name, errorId, description, solution) values('FunctionCodeSizeAnalyzer', '5.4', 'FunctionCodeSizeAnalyzer', 'solution to 5.4');
+insert into Analyzer(name, errorId, description, solution) values('GeAndLeCondAnalyzer', '6.1', 'GeAndLeCondAnalyzer', 'solution to 6.1');
+insert into Analyzer(name, errorId, description, solution) values('ConditionInLoopAnalyzer', '6.2', 'ConditionInLoopAnalyzer', 'solution to 6.2');
+insert into Analyzer(name, errorId, description, solution) values('FindSameFunctionAnalyzer', '6.3', 'FindSameFunctionAnalyzer', 'solution to 6.3');
+insert into Analyzer(name, errorId, description, solution) values('MultiConditionAnalyzer', '6.4', 'MultiConditionAnalyzer', 'solution to 6.4');
+insert into Analyzer(name, errorId, description, solution) values('FunctionParameterAnalyzer', '7.1', 'FunctionParameterAnalyzer', 'solution to 7.1');
+insert into Analyzer(name, errorId, description, solution) values('StructPrmsAnalyzer', '7.2', 'StructPrmsAnalyzer', 'solution to 7.2');
 
 insert into GroupInfo(name) values('Admin');
 insert into GroupInfo(name) values('Manager');

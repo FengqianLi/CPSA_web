@@ -15,7 +15,8 @@
 	<p>
 		<%=user.getUserName()%>, 你好！ 欢迎使用华为静态代码检测工具。 <a href="Upload"
 			target="main"> 上传代码 </a> <a href="user_modify.jsp" target="main">
-			修改密码 </a> <a href="Logout" target=_top> 退出 </a>
+			修改密码 </a><a href="solution.jsp" target="main"> 解决方法列表 </a> <a
+			href="Logout" target=_top> 退出 </a>
 	</p>
 </body>
 </html>

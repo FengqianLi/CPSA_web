@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="javabeans.AnalyzeResult, dbManager.DBManager"%>
 <%@page
-	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.util.Iterator"%>
+	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.util.Iterator, javabeans.Analyzer"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
@@ -37,13 +37,15 @@
 				count++;
 				Map.Entry entry = (Map.Entry) iter.next();
 				String analyzeName = (String) entry.getKey();
+				Analyzer analyzer = DBManager.dbUtil
+						.getAnalyzerByAnalyzerName(analyzeName);
 				int error_num = (Integer) entry.getValue();
 		%>
 
 		<div id="content">
 			<div id="file">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<%=analyzeName%>
+				<%=analyzer.getErrorId()%>: <%=analyzeName%>
 			</div>
 		</div>
 		<div id="error">

@@ -94,7 +94,8 @@
 							for (Analyzer analyzer : analyzerList) {
 						%>
 						<li><input type="checkbox" name="analyzer"
-							value="<%=analyzer.getAId()%>" checked /><%=analyzer.getName()%></li>
+							value="<%=analyzer.getAId()%>" checked /><%=analyzer.getErrorId()%>:
+							<%=analyzer.getName()%></li>
 						<%
 							}
 						%>
@@ -134,7 +135,8 @@
 							for (Analyzer analyzer : analyzerList) {
 						%>
 						<li><input type="checkbox" name="analyzer"
-							value="<%=analyzer.getAId()%>" checked /><%=analyzer.getName()%></li>
+							value="<%=analyzer.getAId()%>" checked /><%=analyzer.getErrorId()%>:
+							<%=analyzer.getName()%></li>
 						<%
 							}
 						%>
@@ -150,8 +152,7 @@
 				} else if (3 == mode) {
 					if (recompilableProjectList.size() == 0) {
 						out.println("<h2>没有工程</h2>");
-					}
-					else {
+					} else {
 			%>
 
 			<form id="uploadForm" name="uploadForm" method="post"
@@ -192,7 +193,8 @@
 							for (Analyzer analyzer : analyzerList) {
 						%>
 						<li><input type="checkbox" name="analyzer"
-							value="<%=analyzer.getAId()%>" checked /><%=analyzer.getName()%></li>
+							value="<%=analyzer.getAId()%>" checked /><%=analyzer.getErrorId()%>:
+							<%=analyzer.getName()%></li>
 						<%
 							}
 						%>
