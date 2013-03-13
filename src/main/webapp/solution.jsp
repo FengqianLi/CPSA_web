@@ -14,39 +14,43 @@
 <head>
 <link href="css/solution.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="css/submitlist.css" rel="stylesheet" type="text/css">
 <title>Overall Report</title>
 </head>
 <body>
-	<h1>
-		错误解决方案
-	</h1>
-	<hr>
+	<h1 class="h_1">错误解决方案</h1>
+	<hr class="hr4">
 	<div id="container">
 		<div id="header">
 			<div id="filename">规则名称</div>
-			<div id="error_num">解决方案</div>
+			<div id="description">出现场景</div>
+			<div id="solution">解决方案</div>
 		</div>
 		<%
 			int count = 0;
 			for (Analyzer analyzer : analyzerList) {
-				count ++;
+				count++;
 		%>
-		
+
 		<div id="content">
 			<div id="file">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<%=analyzer.getErrorId()%>:
 				<%=analyzer.getName()%>
 			</div>
+			<div id="description_content">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<%=analyzer.getDescription()%>
+			</div>
+			<div id="solution_content">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<%=analyzer.getSolution()%>
+			</div>
 		</div>
-		<div id="error">
-			<center><%=analyzer.getSolution()%></center>
-		</div>
+
 		<%
 			}
 		%>
-		
+
 	</div>
 
 	<div id="footer">

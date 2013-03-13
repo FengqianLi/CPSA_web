@@ -1,6 +1,11 @@
 drop database if exists huawei;
 create database huawei;
 
+CHARACTER SET utf8
+DEFAULT CHARACTER SET utf8
+COLLATE utf8_general_ci
+DEFAULT COLLATE utf8_general_ci;
+
 use huawei;
 
 create table GroupInfo(
@@ -93,9 +98,9 @@ create table AnalyzeResult(
 insert into Analyzer(name, errorId, description, solution) values('GlobalVarSizeAnalyzer', '1.1', 'GlobalVarSizeAnalyzer', 'solution to 1.1');
 insert into Analyzer(name, errorId, description, solution) values('ForLoopCombineAnalyzer', '1.2', 'ForLoopCombineAnalyzer', 'solution to 1.2');
 insert into Analyzer(name, errorId, description, solution) values('InitializeArrayByForLoopAnalyzer', '1.3', 'InitializeArrayByForLoopAnalyzer', 'solution to 1.3');
-insert into Analyzer(name, errorId, description, solution) values('IfToSwitchAnalyzer', '1.4', 'IfToSwitchAnalyzer', 'solution to 1.4');
+insert into Analyzer(name, errorId, description, solution) values('IfToSwitchAnalyzer', '1.4', '代码中含有多重if/else。', '使用switch/case语句代替多重if/else。');
 insert into Analyzer(name, errorId, description, solution) values('DivideByTwosExponentAnalyzer', '2.1', 'DivideByTwosExponentAnalyzer', 'solution to 2.1');
-insert into Analyzer(name, errorId, description, solution) values('FunctionCallAnalyzer', '2.2', 'FunctionCallAnalyzer', 'solution to 2.2');
+insert into Analyzer(name, errorId, description, solution) values('FunctionCallAnalyzer', '2.2', '该函数以\nIf (符合某些条件) {\nDo something\n} else {\nReturn\n}', '我们在调用一个函数以后，进入这个函数的处理，会判断相应的一些条件是否满足，如果不满足则返回。当条件不满足，这个函数的调用开销完全就是在浪费资源。我们为什么不对这些条件进行提前判断呢？如果条件不满足，则不用调用相应的函数了，节省开销。');
 insert into Analyzer(name, errorId, description, solution) values('BadMemOperationCallAnalyzer', '2.3', 'BadMemOperationCallAnalyzer', 'solution to 2.3');
 insert into Analyzer(name, errorId, description, solution) values('AssignToConstantAnalyzer', '2.4', 'AssignToConstantAnalyzer', 'solution to 2.4');
 insert into Analyzer(name, errorId, description, solution) values('ForLoopToZeroAnalyzer', '3.1', 'ForLoopToZeroAnalyzer', 'solution to 3.1');
@@ -104,18 +109,18 @@ insert into Analyzer(name, errorId, description, solution) values('LoopDivideAna
 insert into Analyzer(name, errorId, description, solution) values('LocalVarSizeAnalyzer', '3.4', 'LocalVarSizeAnalyzer', 'solution to 3.4');
 insert into Analyzer(name, errorId, description, solution) values('MultiplyByTwosExponentAnalyzer', '4.1', 'MultiplyByTwosExponentAnalyzer', 'solution to 4.1');
 insert into Analyzer(name, errorId, description, solution) values('RealDivisionAnalyzer', '4.2', 'RealDivisionAnalyzer', 'solution to 4.2');
-insert into Analyzer(name, errorId, description, solution) values('MemApplyAnalyzer', '4.3', 'MemApplyAnalyzer', 'solution to 4.3');
-insert into Analyzer(name, errorId, description, solution) values('FunctionAsLoopVarAnalyzer', '4.4', 'FunctionAsLoopVarAnalyzer', 'solution to 4.4');
-insert into Analyzer(name, errorId, description, solution) values('StructSizeAnalyzer', '5.1', 'StructSizeAnalyzer', 'solution to 5.1');
+insert into Analyzer(name, errorId, description, solution) values('MemApplyAnalyzer', '4.3', '在该函数里，存在大量的内存申请释放操作。', '在单个函数处理中，若出现频繁申请释放内存的操作，可以预先申请一大块空间，根据需要，模拟申请释放内存操作。');
+insert into Analyzer(name, errorId, description, solution) values('FunctionAsLoopVarAnalyzer', '4.4', 'strlen()函数在for循环中作为循环参数出现', '使用变量代替strlen()函数作为循环参数.');
+insert into Analyzer(name, errorId, description, solution) values('StructSizeAnalyzer', '5.1', '该结构体不是4字节对齐的。', '更改结构体成员类型，使其符合4字节对齐，以提升访问速度。');
 insert into Analyzer(name, errorId, description, solution) values('BitNotExprAnalyzer', '5.2', 'BitNotExprAnalyzer', 'solution to 5.2');
-insert into Analyzer(name, errorId, description, solution) values('StringCopyAnalyzer', '5.3', 'StringCopyAnalyzer', 'solution to 5.3');
+insert into Analyzer(name, errorId, description, solution) values('StringCopyAnalyzer', '5.3', '使用strcpy/strncpy复制字符串', '用memcpy代替strcpy/strncpy复制字符串。');
 insert into Analyzer(name, errorId, description, solution) values('FunctionCodeSizeAnalyzer', '5.4', 'FunctionCodeSizeAnalyzer', 'solution to 5.4');
 insert into Analyzer(name, errorId, description, solution) values('GeAndLeCondAnalyzer', '6.1', 'GeAndLeCondAnalyzer', 'solution to 6.1');
-insert into Analyzer(name, errorId, description, solution) values('ConditionInLoopAnalyzer', '6.2', 'ConditionInLoopAnalyzer', 'solution to 6.2');
-insert into Analyzer(name, errorId, description, solution) values('FindSameFunctionAnalyzer', '6.3', 'FindSameFunctionAnalyzer', 'solution to 6.3');
+insert into Analyzer(name, errorId, description, solution) values('ConditionInLoopAnalyzer', '6.2', '如果循环体内存在逻辑判断，并且循环次数很大，宜将逻辑判断移到循环体的外面。', '将与循环体无关的条件判断放到循环体之外进行。');
+insert into Analyzer(name, errorId, description, solution) values('FindSameFunctionAnalyzer', '6.3', '代码中存在另一个函数实现相同功能。', '清理冗余代码');
 insert into Analyzer(name, errorId, description, solution) values('MultiConditionAnalyzer', '6.4', 'MultiConditionAnalyzer', 'solution to 6.4');
 insert into Analyzer(name, errorId, description, solution) values('FunctionParameterAnalyzer', '7.1', 'FunctionParameterAnalyzer', 'solution to 7.1');
-insert into Analyzer(name, errorId, description, solution) values('StructPrmsAnalyzer', '7.2', 'StructPrmsAnalyzer', 'solution to 7.2');
+insert into Analyzer(name, errorId, description, solution) values('StructPrmsAnalyzer', '7.2', '使用结构体作为函数的形参或返回值。', '在允许的情况下使用传递指针的方式取代传递结构体变量。');
 
 insert into GroupInfo(name) values('Admin');
 insert into GroupInfo(name) values('Manager');
