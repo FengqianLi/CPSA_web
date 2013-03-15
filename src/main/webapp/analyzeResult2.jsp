@@ -112,7 +112,16 @@
 									+ DBManager.dbUtil.getProjectNameBySid(
 											Integer.parseInt(sid[0])).replace(" ", "_")
 									+ "/";
-							html_url1 += name.replace("cpp", "cpp." + sid[0] + ".html");
+							if (name.endsWith(".cpp"))
+								html_url1 += name.replace(".cpp", ".cpp." + sid
+										+ ".html");
+							else if (name.endsWith(".cc"))
+								html_url1 += name
+										.replace(".cc", ".cc." + sid + ".html");
+							else if (name.endsWith(".h"))
+								html_url1 += name.replace(".h", ".h." + sid + ".html");
+							else if (name.endsWith(".c"))
+								html_url1 += name.replace(".c", ".c." + sid + ".html");
 							out.println("<a href=\"" + html_url1
 									+ "\" target=\"_blank\">[1]</a>");
 
@@ -123,7 +132,16 @@
 									+ DBManager.dbUtil.getProjectNameBySid(
 											Integer.parseInt(sid[1])).replace(" ", "_")
 									+ "/";
-							html_url2 += name.replace("cpp", "cpp." + sid[1] + ".html");
+							if (name.endsWith(".cpp"))
+								html_url2 += name.replace(".cpp", ".cpp." + sid
+										+ ".html");
+							else if (name.endsWith(".cc"))
+								html_url2 += name
+										.replace(".cc", ".cc." + sid + ".html");
+							else if (name.endsWith(".h"))
+								html_url2 += name.replace(".h", ".h." + sid + ".html");
+							else if (name.endsWith(".c"))
+								html_url2 += name.replace(".c", ".c." + sid + ".html");
 							out.println("<a href=\"" + html_url2
 									+ "\" target=\"_blank\"> [2]</a>");
 				%>

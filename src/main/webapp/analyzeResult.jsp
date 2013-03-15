@@ -79,14 +79,15 @@
 									+ "/"
 									+ DBManager.dbUtil.getProjectNameBySid(sid)
 											.replace(" ", "_") + "/";
-							if (name.contains("cpp"))
-								html_url += name.replace("cpp", "cpp." + sid + ".html");
-							else if (name.contains("cc"))
-								html_url += name.replace("cc", "cc." + sid + ".html");
-							else if (name.contains("h"))
-								html_url += name.replace("h", "h." + sid + ".html");
-							else if (name.contains("c"))
-								html_url += name.replace("c", "c." + sid + ".html");
+							if (name.endsWith(".cpp"))
+								html_url += name.replace(".cpp", ".cpp." + sid
+										+ ".html");
+							else if (name.endsWith(".cc"))
+								html_url += name.replace(".cc", ".cc." + sid + ".html");
+							else if (name.endsWith(".h"))
+								html_url += name.replace(".h", ".h." + sid + ".html");
+							else if (name.endsWith(".c"))
+								html_url += name.replace(".c", ".c." + sid + ".html");
 
 							out.println("<a href=\"" + html_url
 									+ "\" target=\"_blank\">" + nameWithoutPath
