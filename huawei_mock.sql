@@ -1,11 +1,6 @@
 drop database if exists huawei;
 create database huawei;
 
-CHARACTER SET utf8
-DEFAULT CHARACTER SET utf8
-COLLATE utf8_general_ci
-DEFAULT COLLATE utf8_general_ci;
-       
 use huawei;
 
 create table GroupInfo(
@@ -121,6 +116,12 @@ insert into Analyzer(name, errorId, description, solution) values('FindSameFunct
 insert into Analyzer(name, errorId, description, solution) values('MultiConditionAnalyzer', '6.4', '条件判断时出现大于等于三个的条件判断同时存在', '提示将多个条件判断中概率最高的条件放在最前面。（也可能不需要调整）');
 insert into Analyzer(name, errorId, description, solution) values('FunctionParameterAnalyzer', '7.1', '函数参数过多', '将函数参数减少');
 insert into Analyzer(name, errorId, description, solution) values('StructPrmsAnalyzer', '7.2', '使用结构体作为函数的形参或返回值。', '在允许的情况下使用传递指针的方式取代传递结构体变量。');
+insert into Analyzer(name, errorId, description, solution) values('CalcMemAnalyzer', '7.3', 'description of CalcMemAnalyzer', 'solution to CalcMemAnalyzer');
+insert into Analyzer(name, errorId, description, solution) values('FloatTriCallAnalyzer', '7.4', 'description of FloatTriCallAnalyzer.h', 'solution to FloatTriCallAnalyzer');
+insert into Analyzer(name, errorId, description, solution) values('IfToIfelseAnalyzer', '8.1', 'description of IfToIfelseAnalyzer', 'solution to IfToIfelseAnalyzer');
+insert into Analyzer(name, errorId, description, solution) values('ReducibleIfAnalyzer', '8.2', 'description of ReducibleIfAnalyzer', 'solution to ReducibleIfAnalyzer');
+
+
 
 insert into GroupInfo(name) values('Manager');
 insert into GroupInfo(name) values('Compiler_Group');
