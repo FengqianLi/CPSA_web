@@ -107,7 +107,7 @@
 
 		</div>
 		<div id="error">
-			<center><%=error_num%>
+			<%=error_num%>
 		</div>
 	</div>
 

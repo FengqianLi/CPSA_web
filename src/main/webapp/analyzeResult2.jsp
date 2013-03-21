@@ -113,15 +113,17 @@
 											Integer.parseInt(sid[0])).replace(" ", "_")
 									+ "/";
 							if (name.endsWith(".cpp"))
-								html_url1 += name.replace(".cpp", ".cpp." + sid
+								html_url1 += name.replace(".cpp", ".cpp." + sid[0]
 										+ ".html");
 							else if (name.endsWith(".cc"))
-								html_url1 += name
-										.replace(".cc", ".cc." + sid + ".html");
+								html_url1 += name.replace(".cc", ".cc." + sid[0]
+										+ ".html");
 							else if (name.endsWith(".h"))
-								html_url1 += name.replace(".h", ".h." + sid + ".html");
+								html_url1 += name.replace(".h", ".h." + sid[0]
+										+ ".html");
 							else if (name.endsWith(".c"))
-								html_url1 += name.replace(".c", ".c." + sid + ".html");
+								html_url1 += name.replace(".c", ".c." + sid[0]
+										+ ".html");
 							out.println("<a href=\"" + html_url1
 									+ "\" target=\"_blank\">[1]</a>");
 
@@ -133,15 +135,17 @@
 											Integer.parseInt(sid[1])).replace(" ", "_")
 									+ "/";
 							if (name.endsWith(".cpp"))
-								html_url2 += name.replace(".cpp", ".cpp." + sid
+								html_url2 += name.replace(".cpp", ".cpp." + sid[1]
 										+ ".html");
 							else if (name.endsWith(".cc"))
-								html_url2 += name
-										.replace(".cc", ".cc." + sid + ".html");
+								html_url2 += name.replace(".cc", ".cc." + sid[1]
+										+ ".html");
 							else if (name.endsWith(".h"))
-								html_url2 += name.replace(".h", ".h." + sid + ".html");
+								html_url2 += name.replace(".h", ".h." + sid[1]
+										+ ".html");
 							else if (name.endsWith(".c"))
-								html_url2 += name.replace(".c", ".c." + sid + ".html");
+								html_url2 += name.replace(".c", ".c." + sid[1]
+										+ ".html");
 							out.println("<a href=\"" + html_url2
 									+ "\" target=\"_blank\"> [2]</a>");
 				%>
