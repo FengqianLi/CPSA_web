@@ -90,36 +90,36 @@ create table AnalyzeResult(
 
 
 -- insert the analyzer infomations
-insert into Analyzer(name, errorId, description, solution) values('GlobalVarSizeAnalyzer', '1.1', '全局变量和局部变量不同，只有在程序运行结束以后才能释放。因此在有些条件下全局变量的大小如能保持在一个范围之内程序的健壮性会更好。', '修改全局变量的定义，尽可能把全局变量变为局部变量。');
-insert into Analyzer(name, errorId, description, solution) values('ForLoopCombineAnalyzer', '1.2', '当两个连续for循环可以合并，可以减少对于index变量的操作，从而减少了程序所需运行的时钟周期。', '合并两个循环语句。');
-insert into Analyzer(name, errorId, description, solution) values('InitializeArrayByForLoopAnalyzer', '1.3', '使用循环初始化数组元素', '当数组成员默认初始化为清零或其它特定模式时，如果循环较长，考虑是否可以使用memset操作替代循环初始化');
-insert into Analyzer(name, errorId, description, solution) values('IfToSwitchAnalyzer', '1.4', '代码中含有多重if/else。', '使用switch/case语句代替多重if/else。');
-insert into Analyzer(name, errorId, description, solution) values('DivideByTwosExponentAnalyzer', '2.1', '常数乘法，除法操作数是2的幂', '数乘除法操作数是2的幂次时请使用bit移位运算，节约指令周期');
-insert into Analyzer(name, errorId, description, solution) values('FunctionCallAnalyzer', '2.2', '调用频繁且大多数正常业务流程下进入的这个函数会马上return，如果有主要的条件可以判断是否能进入改函数。', '将这个函数中条件判断部分提取到调用这个函数之前部分，减少不必要的函数调用开销。');
-insert into Analyzer(name, errorId, description, solution) values('BadMemOperationCallAnalyzer', '2.3', '用memset设置POD类型变量内容', 'memset的第一个参数如果是POD类型，考虑使用变量模版赋值或是常量赋值替代memset，较少函数调用开销');
-insert into Analyzer(name, errorId, description, solution) values('AssignToConstantAnalyzer', '2.4', '变量赋值为常量', '如果使用变量保存常量内容，之后实际一直使用此常量，可以考虑把此常量定义为宏，在使用处直接使用此宏');
-insert into Analyzer(name, errorId, description, solution) values('ForLoopToZeroAnalyzer', '3.1', '和0的比较判断与和其他数的比较判断相比少了一次减操作，所以减少了时钟周期。', '将从0到n的循环改为从n到0');
-insert into Analyzer(name, errorId, description, solution) values('SqrtAnalyzer', '3.2', 'SqrtAnalyzer', 'solution to 3.2');
-insert into Analyzer(name, errorId, description, solution) values('LoopDivideAnalyzer', '3.3', '循环体中代码量较多', '考虑展开此循环。');
-insert into Analyzer(name, errorId, description, solution) values('LocalVarSizeAnalyzer', '3.4', '如果局部变量的大小超过512字节，将其改为全局变量或者静态分配的内存更加合适，因为堆栈的大小有限。', '将此局部变量改为全局变量或者静态变量。');
-insert into Analyzer(name, errorId, description, solution) values('MultiplyByTwosExponentAnalyzer', '4.1', '常数乘法，乘法操作数是2的幂', '常数乘法操作数是2的幂次时请使用bit以为运算，节约指令周期');
-insert into Analyzer(name, errorId, description, solution) values('RealDivisionAnalyzer', '4.2', 'RealDivisionAnalyzer', 'solution to 4.2');
-insert into Analyzer(name, errorId, description, solution) values('MemApplyAnalyzer', '4.3', '在该函数里，存在大量的内存申请释放操作。', '在单个函数处理中，若出现频繁申请释放内存的操作，可以预先申请一大块空间，根据需要，模拟申请释放内存操作。');
-insert into Analyzer(name, errorId, description, solution) values('FunctionAsLoopVarAnalyzer', '4.4', 'strlen()函数在for循环中作为循环参数出现', '使用变量代替strlen()函数作为循环参数.');
-insert into Analyzer(name, errorId, description, solution) values('StructSizeAnalyzer', '5.1', '该结构体不是4字节对齐的。', '更改结构体成员类型，使其符合4字节对齐，以提升访问速度。');
-insert into Analyzer(name, errorId, description, solution) values('BitNotExprAnalyzer', '5.2', 'BitNotExprAnalyzer', 'solution to 5.2');
-insert into Analyzer(name, errorId, description, solution) values('StringCopyAnalyzer', '5.3', '使用strcpy/strncpy复制字符串', '用memcpy代替strcpy/strncpy复制字符串。');
-insert into Analyzer(name, errorId, description, solution) values('FunctionCodeSizeAnalyzer', '5.4', '当函数有效代码太短时可以通过将它转化为宏来减小函数调用的开支', '将函数转化为宏');
-insert into Analyzer(name, errorId, description, solution) values('GeAndLeCondAnalyzer', '6.1', '条件判断中同时存在x大于等于某个数并且小于等于某个数时可以将其优化', '将此条件判断改为x-min>=0并且x-max<=0');
-insert into Analyzer(name, errorId, description, solution) values('ConditionInLoopAnalyzer', '6.2', '如果循环体内存在逻辑判断，并且循环次数很大，宜将逻辑判断移到循环体的外面。', '将与循环体无关的条件判断放到循环体之外进行。');
-insert into Analyzer(name, errorId, description, solution) values('FindSameFunctionAnalyzer', '6.3', '代码中存在另一个函数实现相同功能。', '清理冗余代码');
-insert into Analyzer(name, errorId, description, solution) values('MultiConditionAnalyzer', '6.4', '条件判断时出现大于等于三个的条件判断同时存在', '提示将多个条件判断中概率最高的条件放在最前面。（也可能不需要调整）');
-insert into Analyzer(name, errorId, description, solution) values('FunctionParameterAnalyzer', '7.1', '函数参数过多', '将函数参数减少');
-insert into Analyzer(name, errorId, description, solution) values('StructPrmsAnalyzer', '7.2', '使用结构体作为函数的形参或返回值。', '在允许的情况下使用传递指针的方式取代传递结构体变量。');
-insert into Analyzer(name, errorId, description, solution) values('CalcMemAnalyzer', '7.3', 'description of CalcMemAnalyzer', 'solution to CalcMemAnalyzer');
-insert into Analyzer(name, errorId, description, solution) values('FloatTriCallAnalyzer', '7.4', 'description of FloatTriCallAnalyzer.h', 'solution to FloatTriCallAnalyzer');
-insert into Analyzer(name, errorId, description, solution) values('IfToIfelseAnalyzer', '8.1', 'description of IfToIfelseAnalyzer', 'solution to IfToIfelseAnalyzer');
-insert into Analyzer(name, errorId, description, solution) values('ReducibleIfAnalyzer', '8.2', 'description of ReducibleIfAnalyzer', 'solution to ReducibleIfAnalyzer');
+insert into Analyzer(name, errorId, description, solution) values('GlobalVarSizeAnalyzer', '1', '全局变量和局部变量不同，只有在程序运行结束以后才能释放。因此在有些条件下全局变量的大小如能保持在一个范围之内程序的健壮性会更好。', '修改全局变量的定义，尽可能把全局变量变为局部变量。');
+insert into Analyzer(name, errorId, description, solution) values('ForLoopCombineAnalyzer', '2', '当两个连续for循环可以合并，可以减少对于index变量的操作，从而减少了程序所需运行的时钟周期。', '合并两个循环语句。');
+insert into Analyzer(name, errorId, description, solution) values('InitializeArrayByForLoopAnalyzer', '3', '使用循环初始化数组元素', '当数组成员默认初始化为清零或其它特定模式时，如果循环较长，考虑是否可以使用memset操作替代循环初始化');
+insert into Analyzer(name, errorId, description, solution) values('IfToSwitchAnalyzer', '4', '代码中含有多重if/else。', '使用switch/case语句代替多重if/else。');
+insert into Analyzer(name, errorId, description, solution) values('DivideByTwosExponentAnalyzer', '5', '常数乘法，除法操作数是2的幂', '数乘除法操作数是2的幂次时请使用bit移位运算，节约指令周期');
+insert into Analyzer(name, errorId, description, solution) values('FunctionCallAnalyzer', '6', '调用频繁且大多数正常业务流程下进入的这个函数会马上return，如果有主要的条件可以判断是否能进入改函数。', '将这个函数中条件判断部分提取到调用这个函数之前部分，减少不必要的函数调用开销。');
+insert into Analyzer(name, errorId, description, solution) values('BadMemOperationCallAnalyzer', '7', '用memset设置POD类型变量内容', 'memset的第一个参数如果是POD类型，考虑使用变量模版赋值或是常量赋值替代memset，较少函数调用开销');
+insert into Analyzer(name, errorId, description, solution) values('AssignToConstantAnalyzer', '8', '变量赋值为常量', '如果使用变量保存常量内容，之后实际一直使用此常量，可以考虑把此常量定义为宏，在使用处直接使用此宏');
+insert into Analyzer(name, errorId, description, solution) values('ForLoopToZeroAnalyzer', '9', '和0的比较判断与和其他数的比较判断相比少了一次减操作，所以减少了时钟周期。', '将从0到n的循环改为从n到0');
+insert into Analyzer(name, errorId, description, solution) values('SqrtAnalyzer', '10', 'SqrtAnalyzer', 'solution to 3.2');
+insert into Analyzer(name, errorId, description, solution) values('LoopDivideAnalyzer', '11', '循环体中代码量较多', '考虑展开此循环。');
+insert into Analyzer(name, errorId, description, solution) values('LocalVarSizeAnalyzer', '12', '如果局部变量的大小超过512字节，将其改为全局变量或者静态分配的内存更加合适，因为堆栈的大小有限。', '将此局部变量改为全局变量或者静态变量。');
+insert into Analyzer(name, errorId, description, solution) values('MultiplyByTwosExponentAnalyzer', '13', '常数乘法，乘法操作数是2的幂', '常数乘法操作数是2的幂次时请使用bit以为运算，节约指令周期');
+insert into Analyzer(name, errorId, description, solution) values('RealDivisionAnalyzer', '14', 'RealDivisionAnalyzer', 'solution to 4.2');
+insert into Analyzer(name, errorId, description, solution) values('MemApplyAnalyzer', '15', '在该函数里，存在大量的内存申请释放操作。', '在单个函数处理中，若出现频繁申请释放内存的操作，可以预先申请一大块空间，根据需要，模拟申请释放内存操作。');
+insert into Analyzer(name, errorId, description, solution) values('FunctionAsLoopVarAnalyzer', '16', 'strlen()函数在for循环中作为循环参数出现', '使用变量代替strlen()函数作为循环参数.');
+insert into Analyzer(name, errorId, description, solution) values('StructSizeAnalyzer', '17', '该结构体不是4字节对齐的。', '更改结构体成员类型，使其符合4字节对齐，以提升访问速度。');
+insert into Analyzer(name, errorId, description, solution) values('BitNotExprAnalyzer', '18', 'BitNotExprAnalyzer', 'solution to 5.2');
+insert into Analyzer(name, errorId, description, solution) values('StringCopyAnalyzer', '19', '使用strcpy/strncpy复制字符串', '用memcpy代替strcpy/strncpy复制字符串。');
+insert into Analyzer(name, errorId, description, solution) values('FunctionCodeSizeAnalyzer', '20', '当函数有效代码太短时可以通过将它转化为宏来减小函数调用的开支', '将函数转化为宏');
+insert into Analyzer(name, errorId, description, solution) values('GeAndLeCondAnalyzer', '21', '条件判断中同时存在x大于等于某个数并且小于等于某个数时可以将其优化', '将此条件判断改为x-min>=0并且x-max<=0');
+insert into Analyzer(name, errorId, description, solution) values('ConditionInLoopAnalyzer', '22', '如果循环体内存在逻辑判断，并且循环次数很大，宜将逻辑判断移到循环体的外面。', '将与循环体无关的条件判断放到循环体之外进行。');
+insert into Analyzer(name, errorId, description, solution) values('FindSameFunctionAnalyzer', '23', '代码中存在另一个函数实现相同功能。', '清理冗余代码');
+insert into Analyzer(name, errorId, description, solution) values('MultiConditionAnalyzer', '24', '条件判断时出现大于等于三个的条件判断同时存在', '提示将多个条件判断中概率最高的条件放在最前面。（也可能不需要调整）');
+insert into Analyzer(name, errorId, description, solution) values('FunctionParameterAnalyzer', '25', '函数参数过多', '将函数参数减少');
+insert into Analyzer(name, errorId, description, solution) values('StructPrmsAnalyzer', '26', '使用结构体作为函数的形参或返回值。', '在允许的情况下使用传递指针的方式取代传递结构体变量。');
+insert into Analyzer(name, errorId, description, solution) values('CalcMemAnalyzer', '27', 'description of CalcMemAnalyzer', 'solution to CalcMemAnalyzer');
+insert into Analyzer(name, errorId, description, solution) values('FloatTriCallAnalyzer', '28', '当三角函数的参数是float类型时', '建议改为float类型的三角函数，比如fsin,fcos等。');
+insert into Analyzer(name, errorId, description, solution) values('IfToIfelseAnalyzer', '29', 'description of IfToIfelseAnalyzer', 'solution to IfToIfelseAnalyzer');
+insert into Analyzer(name, errorId, description, solution) values('ReducibleIfAnalyzer', '30', 'description of ReducibleIfAnalyzer', 'solution to ReducibleIfAnalyzer');
 
 
 
