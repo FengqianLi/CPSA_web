@@ -103,7 +103,7 @@ insert into Analyzer(name, errorId, description, solution) values('SqrtAnalyzer'
 insert into Analyzer(name, errorId, description, solution) values('LoopDivideAnalyzer', '11', '循环体中代码量较多', '考虑展开此循环。');
 insert into Analyzer(name, errorId, description, solution) values('LocalVarSizeAnalyzer', '12', '如果局部变量的大小超过512字节，将其改为全局变量或者静态分配的内存更加合适，因为堆栈的大小有限。', '将此局部变量改为全局变量或者静态变量。');
 insert into Analyzer(name, errorId, description, solution) values('MultiplyByTwosExponentAnalyzer', '13', '常数乘法，乘法操作数是2的幂', '常数乘法操作数是2的幂次时请使用bit以为运算，节约指令周期');
-insert into Analyzer(name, errorId, description, solution) values('RealDivisionAnalyzer', '14', 'RealDivisionAnalyzer', 'solution to 4.2');
+insert into Analyzer(name, errorId, description, solution) values('RealDivisionAnalyzer', '14', '当一个数被常数进行除法运算时，由于除法操作要比乘法慢，因此可以将常数除法换成乘法', '将常数除法换成乘法');
 insert into Analyzer(name, errorId, description, solution) values('MemApplyAnalyzer', '15', '在该函数里，存在大量的内存申请释放操作。', '在单个函数处理中，若出现频繁申请释放内存的操作，可以预先申请一大块空间，根据需要，模拟申请释放内存操作。');
 insert into Analyzer(name, errorId, description, solution) values('FunctionAsLoopVarAnalyzer', '16', 'strlen()函数在for循环中作为循环参数出现', '使用变量代替strlen()函数作为循环参数.');
 insert into Analyzer(name, errorId, description, solution) values('StructSizeAnalyzer', '17', '该结构体不是4字节对齐的。', '更改结构体成员类型，使其符合4字节对齐，以提升访问速度。');
