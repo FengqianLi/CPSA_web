@@ -99,7 +99,7 @@ insert into Analyzer(name, errorId, description, solution) values('FunctionCallA
 insert into Analyzer(name, errorId, description, solution) values('BadMemOperationCallAnalyzer', '7', '用memset设置POD类型变量内容', 'memset的第一个参数如果是POD类型，考虑使用变量模版赋值或是常量赋值替代memset，较少函数调用开销');
 insert into Analyzer(name, errorId, description, solution) values('AssignToConstantAnalyzer', '8', '变量赋值为常量', '如果使用变量保存常量内容，之后实际一直使用此常量，可以考虑把此常量定义为宏，在使用处直接使用此宏');
 insert into Analyzer(name, errorId, description, solution) values('ForLoopToZeroAnalyzer', '9', '和0的比较判断与和其他数的比较判断相比少了一次减操作，所以减少了时钟周期。', '将从0到n的循环改为从n到0');
-insert into Analyzer(name, errorId, description, solution) values('SqrtAnalyzer', '10', 'SqrtAnalyzer', 'solution to 3.2');
+insert into Analyzer(name, errorId, description, solution) values('SqrtAnalyzer', '10', 'c数学函数库中的sqrt函数具有理想的精度，但对于程序来说速度太慢。', '在对速度有高要求的情况下通过牛顿迭代法替换sqrt函数。');
 insert into Analyzer(name, errorId, description, solution) values('LoopDivideAnalyzer', '11', '循环体中代码量较多', '考虑展开此循环。');
 insert into Analyzer(name, errorId, description, solution) values('LocalVarSizeAnalyzer', '12', '如果局部变量的大小超过512字节，将其改为全局变量或者静态分配的内存更加合适，因为堆栈的大小有限。', '将此局部变量改为全局变量或者静态变量。');
 insert into Analyzer(name, errorId, description, solution) values('MultiplyByTwosExponentAnalyzer', '13', '常数乘法，乘法操作数是2的幂', '常数乘法操作数是2的幂次时请使用bit以为运算，节约指令周期');
@@ -107,7 +107,7 @@ insert into Analyzer(name, errorId, description, solution) values('RealDivisionA
 insert into Analyzer(name, errorId, description, solution) values('MemApplyAnalyzer', '15', '在该函数里，存在大量的内存申请释放操作。', '在单个函数处理中，若出现频繁申请释放内存的操作，可以预先申请一大块空间，根据需要，模拟申请释放内存操作。');
 insert into Analyzer(name, errorId, description, solution) values('FunctionAsLoopVarAnalyzer', '16', 'strlen()函数在for循环中作为循环参数出现', '使用变量代替strlen()函数作为循环参数.');
 insert into Analyzer(name, errorId, description, solution) values('StructSizeAnalyzer', '17', '该结构体不是4字节对齐的。', '更改结构体成员类型，使其符合4字节对齐，以提升访问速度。');
-insert into Analyzer(name, errorId, description, solution) values('BitNotExprAnalyzer', '18', 'BitNotExprAnalyzer', 'solution to 5.2');
+insert into Analyzer(name, errorId, description, solution) values('BitNotExprAnalyzer', '18', '取反操作时可能会因为范围不同而产生程序员不想要的结果', '建议在这种情况下不要使用取反操作。');
 insert into Analyzer(name, errorId, description, solution) values('StringCopyAnalyzer', '19', '使用strcpy/strncpy复制字符串', '用memcpy代替strcpy/strncpy复制字符串。');
 insert into Analyzer(name, errorId, description, solution) values('FunctionCodeSizeAnalyzer', '20', '当函数有效代码太短时可以通过将它转化为宏来减小函数调用的开支', '将函数转化为宏');
 insert into Analyzer(name, errorId, description, solution) values('GeAndLeCondAnalyzer', '21', '条件判断中同时存在x大于等于某个数并且小于等于某个数时可以将其优化', '将此条件判断改为x-min>=0并且x-max<=0');
@@ -116,10 +116,10 @@ insert into Analyzer(name, errorId, description, solution) values('FindSameFunct
 insert into Analyzer(name, errorId, description, solution) values('MultiConditionAnalyzer', '24', '条件判断时出现大于等于三个的条件判断同时存在', '提示将多个条件判断中概率最高的条件放在最前面。（也可能不需要调整）');
 insert into Analyzer(name, errorId, description, solution) values('FunctionParameterAnalyzer', '25', '函数参数过多', '将函数参数减少');
 insert into Analyzer(name, errorId, description, solution) values('StructPrmsAnalyzer', '26', '使用结构体作为函数的形参或返回值。', '在允许的情况下使用传递指针的方式取代传递结构体变量。');
-insert into Analyzer(name, errorId, description, solution) values('CalcMemAnalyzer', '27', 'description of CalcMemAnalyzer', 'solution to CalcMemAnalyzer');
+insert into Analyzer(name, errorId, description, solution) values('CalcMemAnalyzer', '27', '当函数中出现的栈内存太大时会影响性能', '建议减少分配的栈空间');
 insert into Analyzer(name, errorId, description, solution) values('FloatTriCallAnalyzer', '28', '当三角函数的参数是float类型时', '建议改为float类型的三角函数，比如fsin,fcos等。');
-insert into Analyzer(name, errorId, description, solution) values('IfToIfelseAnalyzer', '29', 'description of IfToIfelseAnalyzer', 'solution to IfToIfelseAnalyzer');
-insert into Analyzer(name, errorId, description, solution) values('ReducibleIfAnalyzer', '30', 'description of ReducibleIfAnalyzer', 'solution to ReducibleIfAnalyzer');
+insert into Analyzer(name, errorId, description, solution) values('IfToIfelseAnalyzer', '29', '前后连续的几个条件判断语句可能存在逻辑上的矛盾，即后面的if所做的条件判断可以从之前的判断中推导出来，而从在后面的if中没有必要进行重复的判断。这种重复性未必仅仅是判断语句的重复，也可能是互补性。', '将多个连续的if语句改为if else的形式。');
+insert into Analyzer(name, errorId, description, solution) values('ReducibleIfAnalyzer', '30', '在if/else的比较中，前后的判断语句可能存在一定的逻辑相同或者相反，利用这些信息调整比较次序就可能减少判断语句', '调整比较次序来减少判断语句。');
 
 
 
