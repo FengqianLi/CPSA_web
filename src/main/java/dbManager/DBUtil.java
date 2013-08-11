@@ -622,12 +622,12 @@ public class DBUtil {
 	public ArrayList<AnalyzeResult> getAnalyzeResultListBySidandDirectory(
 			int sid, String directory) {
 
-		String sql = "select * from SubmitFile where sid = "
-				+ sid
-				+ " and name like '"
+		String sql = "select * from SubmitFile where name like '"
 				+ directory
 				+ "/%' and name not in (select name from SubmitFile where name like '"
-				+ directory + "/%/%')";
+				+ directory + "/%/%' and sid = " + sid + " )"
+                + " and sid = "
+                + sid;
 
 		ArrayList<AnalyzeResult> analyzeResultList = new ArrayList<AnalyzeResult>();
 		ResultSet rs = anAgent.select(sql);
